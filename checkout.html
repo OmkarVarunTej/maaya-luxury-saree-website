@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout — MAAYA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    cream:'#09150d', ivory:'#0d1c12', champagne:'#12281a', gold:'#D4AF6A', brown:'#FAF6EC', maroon:'#8C1414'
+  }, fontFamily: { display:['Cormorant Garamond','serif'], heading:['Playfair Display','serif'], body:['DM Sans','sans-serif'] } } } }
+</script>
+<link rel="stylesheet" href="css/main.css"/>
+<style>
+  .step-dot{ width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; border:1.5px solid rgba(212,175,106,0.3); transition:all 300ms; color:#FCE185; }
+  .step-dot.active{ background:#8C1414; color:#ffffff; border-color:#D4AF6A; box-shadow:0 0 12px rgba(140,20,20,0.5); }
+  .step-dot.done{ background:var(--gold); color:#09150d; border-color:var(--gold); }
+  .step-line{ flex:1; height:1.5px; background:rgba(212,175,106,0.2); }
+  .step-line.done{ background:var(--gold); }
+  .input{ width:100%; background:#ffffff; color:#1c2820; border:1px solid rgba(212,175,106,0.5); border-radius:4px; padding:0.75rem 1rem; font-size:0.875rem; outline:none; font-weight:500; }
+  .input::placeholder{ color:#6c7a70; }
+  .input:focus{ border-color:#8C1414; box-shadow:0 0 0 2px rgba(140,20,20,0.15); }
+</style>
+</head>
+<body class="bg-cream">
+
+<div id="navbar-root"></div>
+
+<header class="pt-28 md:pt-32 pb-8 max-w-[900px] mx-auto px-6">
+  <h1 class="section-title text-3xl md:text-4xl text-center mb-8">Checkout</h1>
+  <div class="flex items-center" id="stepper"></div>
+</header>
+
+<section class="max-w-[900px] mx-auto px-6 pb-28">
+  <div id="checkout-body"></div>
+</section>
+
+<div id="footer-root"></div>
+<div id="toast-root"></div>
+
+<script type="module" src="js/checkout.js"></script>
+</body>
+</html>

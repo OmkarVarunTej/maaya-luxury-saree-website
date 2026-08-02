@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard — MAAYA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { colors: {
+    cream:'#09150d', ivory:'#0d1c12', champagne:'#12281a', gold:'#D4AF6A', brown:'#FAF6EC', maroon:'#8C1414'
+  }, fontFamily: { heading:['Playfair Display','serif'], body:['DM Sans','sans-serif'] } } } }
+</script>
+<link rel="stylesheet" href="css/main.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+  body{ background:var(--ivory); }
+  .side-link.active{ background:rgba(184,134,46,0.12); color:var(--gold-deep); border-left-color:var(--gold); }
+  .admin-card{ background:#fff; border:1px solid var(--line-soft); border-radius:6px; }
+</style>
+</head>
+<body class="font-body text-[var(--brown)]">
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="hidden lg:flex flex-col w-64 shrink-0 bg-[var(--brown-deep)] text-cream/90 p-6">
+    <a href="index.html" class="font-heading text-2xl tracking-widest mb-10 text-white">MAAYA</a>
+    <div class="text-[0.65rem] uppercase tracking-widest opacity-40 mb-3">Overview</div>
+    <nav id="admin-nav" class="flex flex-col gap-1 mb-8"></nav>
+    <div class="mt-auto pt-6 border-t border-white/10 flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-[var(--gold)] flex items-center justify-center text-xs font-medium text-white">RA</div>
+      <div class="text-xs"><div class="font-medium">Riya Agarwal</div><div class="opacity-50">Store Admin</div></div>
+    </div>
+  </aside>
+
+  <main class="flex-1 min-w-0">
+    <!-- Topbar -->
+    <div class="bg-white border-b border-[var(--line-soft)] px-6 lg:px-10 h-20 flex items-center justify-between sticky top-0 z-20">
+      <div>
+        <h1 class="font-heading text-xl md:text-2xl">Dashboard Overview</h1>
+        <p class="text-xs opacity-50">Welcome back, here's what's happening at MAAYA today.</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <select id="range-select" class="text-xs border border-[var(--line)] rounded-sm px-3 py-2 bg-transparent">
+          <option>Last 7 Days</option><option selected>Last 30 Days</option><option>Last 90 Days</option>
+        </select>
+        <button class="relative p-2"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="1.5"/><path d="M13.7 21a2 2 0 01-3.4 0" stroke="currentColor" stroke-width="1.5"/></svg><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[var(--maroon)]"></span></button>
+      </div>
+    </div>
+
+    <div class="p-6 lg:p-10">
+      <!-- Sales cards -->
+      <div id="stat-cards" class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8"></div>
+
+      <!-- Charts -->
+      <div class="grid lg:grid-cols-3 gap-5 mb-8">
+        <div class="admin-card p-6 lg:col-span-2">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-heading text-lg">Revenue Trend</h3>
+            <span class="text-xs px-2.5 py-1 rounded-full bg-green-800/10 text-green-800">+18.4% vs last period</span>
+          </div>
+          <canvas id="revenueChart" height="110"></canvas>
+        </div>
+        <div class="admin-card p-6">
+          <h3 class="font-heading text-lg mb-5">Sales by Category</h3>
+          <canvas id="categoryChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5 mb-8">
+        <div class="admin-card p-6 lg:col-span-2">
+          <h3 class="font-heading text-lg mb-5">Recent Orders</h3>
+          <div class="overflow-x-auto"><table class="w-full text-sm" id="orders-table"></table></div>
+        </div>
+        <div class="admin-card p-6">
+          <h3 class="font-heading text-lg mb-5">Top Products</h3>
+          <div id="top-products" class="space-y-4"></div>
+        </div>
+      </div>
+
+      <div class="admin-card p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-heading text-lg">Inventory</h3>
+          <span class="text-xs opacity-50">Products low in stock are highlighted</span>
+        </div>
+        <div class="overflow-x-auto"><table class="w-full text-sm" id="inventory-table"></table></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
