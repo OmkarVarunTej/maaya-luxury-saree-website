@@ -206,8 +206,16 @@ function getFiltered(){
 function renderChips(){
   const chips = [];
   if (state.search) chips.push({label:`"${state.search}"`, clear:()=>state.search=null});
-  if (state.cat!=='all'){ const c = CATEGORIES.find(x=>x.id===state.cat); chips.push({label:c.name, clear:()=>state.cat='all'}); }
-  if (state.occasion!=='all'){ const o = OCCASIONS.find(x=>x.id===state.occasion); chips.push({label:o.name, clear:()=>state.occasion='all'}); }
+  if (state.cat!=='all'){
+    const c = CATEGORIES.find(x=>x.id===state.cat);
+    const label = c ? c.name : (state.cat.charAt(0).toUpperCase() + state.cat.slice(1) + ' Sarees');
+    chips.push({label, clear:()=>state.cat='all'});
+  }
+  if (state.occasion!=='all'){
+    const o = OCCASIONS.find(x=>x.id===state.occasion);
+    const label = o ? o.name : (state.occasion.charAt(0).toUpperCase() + state.occasion.slice(1));
+    chips.push({label, clear:()=>state.occasion='all'});
+  }
   if (state.fabric!=='all') chips.push({label:state.fabric, clear:()=>state.fabric='all'});
   state.colors.forEach(c=>chips.push({label:c, clear:()=>state.colors=state.colors.filter(x=>x!==c)}));
   if (state.minRating) chips.push({label:`${state.minRating}★ & up`, clear:()=>state.minRating=0});
