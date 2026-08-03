@@ -70,8 +70,8 @@ export function toast(msg, sub=''){
   const el = document.createElement('div');
   el.className = 'toast';
   el.innerHTML = `
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#FCE185" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div><div style="font-size:0.88rem;font-weight:700;color:#FCE185;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#ffffff;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#C97B63" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><div style="font-size:0.88rem;font-weight:700;color:#C97B63;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#3F3F46;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
   `;
   root.appendChild(el);
   requestAnimationFrame(()=>el.classList.add('show'));
@@ -140,9 +140,9 @@ export function initSearch(){
     if (q.length < 2){ results.innerHTML=''; return; }
     const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.includes(q) || p.fabric.toLowerCase().includes(q)).slice(0,6);
     results.innerHTML = matches.length ? matches.map(p=>`
-      <a href="product.html?slug=${p.slug}" class="flex items-center gap-4 p-3 hover:bg-black/5 rounded transition">
+      <a href="product.html?slug=${p.slug}" class="flex items-center gap-4 p-3 hover:bg-zinc-100 rounded transition">
         <img src="${p.img1}" class="w-14 h-16 object-cover rounded" alt="${p.name}"/>
-        <div class="flex-1"><div class="text-sm font-medium">${p.name}</div><div class="text-xs font-sans font-bold text-[#FCE185]">${formatINR(p.price)}</div></div>
+        <div class="flex-1"><div class="text-sm font-medium">${p.name}</div><div class="text-xs font-sans font-bold text-black">${formatINR(p.price)}</div></div>
       </a>`).join('') : `<div class="text-sm opacity-60 p-3">No results found for "${q}"</div>`;
   });
   document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') close(); });

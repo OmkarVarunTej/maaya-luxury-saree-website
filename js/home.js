@@ -25,7 +25,7 @@ document.getElementById('collections-grid').innerHTML = CATEGORIES.map((c,i)=>`
     </div>
     <div class="absolute bottom-0 left-0 right-0 p-6 text-white z-10 pointer-events-none">
       <div class="font-heading text-xl md:text-2xl mb-1 text-white font-medium">${c.name}</div>
-      <div class="text-xs tracking-widest uppercase opacity-90 flex items-center gap-2 text-[#FCE185] font-semibold">
+      <div class="text-xs tracking-widest uppercase opacity-90 flex items-center gap-2 text-[#C97B63] font-semibold">
         ${c.count} Pieces
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </div>
@@ -46,9 +46,9 @@ function renderEdit(tab){
   initReveal();
   document.querySelectorAll('.edit-tab').forEach(t=>{
     const active = t.dataset.tab === tab;
-    t.classList.toggle('bg-[var(--gold-deep)]', active);
-    t.classList.toggle('text-[#09150d]', active);
-    t.classList.toggle('border-[var(--gold-deep)]', active);
+    t.classList.toggle('bg-[#C97B63]', active);
+    t.classList.toggle('text-white', active);
+    t.classList.toggle('border-[#C97B63]', active);
   });
 }
 document.querySelectorAll('.edit-tab').forEach(t=>t.addEventListener('click', ()=>renderEdit(t.dataset.tab)));
@@ -61,7 +61,7 @@ document.getElementById('occasion-strip').innerHTML = OCCASIONS.map((o,i)=>`
       <img src="${o.img}" alt="${o.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
     </div>
     <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition"></div>
-    <div class="absolute bottom-5 left-0 right-0 text-center text-[#FCE185] font-heading text-xl">${o.name}</div>
+    <div class="absolute bottom-5 left-0 right-0 text-center text-white font-heading text-xl font-medium">${o.name}</div>
   </a>`).join('');
 
 /* ---------------- Fabrics ---------------- */
@@ -78,7 +78,7 @@ document.getElementById('fabric-grid').innerHTML = FABRICS.map((f,i)=>`
     <div class="aspect-square rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-[var(--gold)] transition">
       <img src="${fabricImgs[f]}" alt="${f}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"/>
     </div>
-    <div class="text-xs md:text-sm font-heading text-[#FCE185]">${f}</div>
+    <div class="text-xs md:text-sm font-heading text-[#3F3F46]">${f}</div>
   </a>`).join('');
 
 /* ---------------- Testimonials ---------------- */

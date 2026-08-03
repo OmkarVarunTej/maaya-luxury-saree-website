@@ -25,10 +25,10 @@ const stats = [
 document.getElementById('stat-cards').innerHTML = stats.map(s=>`
   <div class="admin-card p-6">
     <div class="flex items-center justify-between mb-4">
-      <div class="w-10 h-10 rounded-full bg-[var(--gold)]/12 flex items-center justify-center">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="${s.icon}" stroke="var(--gold-deep)" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div class="w-10 h-10 rounded-full bg-[#C97B63]/10 flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="${s.icon}" stroke="#C97B63" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <span class="text-xs px-2 py-1 rounded-full ${s.up?'bg-green-800/10 text-green-800':'bg-[var(--maroon)]/10 text-[var(--maroon)]'}">${s.change}</span>
+      <span class="text-xs px-2 py-1 rounded-full ${s.up?'bg-green-800/10 text-green-800':'bg-red-700/10 text-red-700'}">${s.change}</span>
     </div>
     <div class="text-2xl font-heading mb-1">${s.value}</div>
     <div class="text-xs opacity-50">${s.label}</div>
@@ -40,15 +40,15 @@ new Chart(document.getElementById('revenueChart'), {
   type:'line',
   data:{ labels:months, datasets:[{
     label:'Revenue', data:[520000,610000,580000,720000,690000,845000],
-    borderColor:'#B8862E', backgroundColor:'rgba(184,134,46,0.12)', fill:true, tension:0.4, pointRadius:3, pointBackgroundColor:'#B8862E'
+    borderColor:'#C97B63', backgroundColor:'rgba(201,123,99,0.12)', fill:true, tension:0.4, pointRadius:3, pointBackgroundColor:'#C97B63'
   }]},
-  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ callback:v=>'₹'+(v/1000)+'k' }, grid:{ color:'#f1ece1' } }, x:{ grid:{ display:false } } } }
+  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ callback:v=>'₹'+(v/1000)+'k' }, grid:{ color:'#EAEAEA' } }, x:{ grid:{ display:false } } } }
 });
 new Chart(document.getElementById('categoryChart'), {
   type:'doughnut',
   data:{ labels: CATEGORIES.map(c=>c.name), datasets:[{
     data: CATEGORIES.map(c=>c.count),
-    backgroundColor:['#5E1A26','#B8862E','#8C6218','#3B2A20','#D4AF6A','#EFE1C6']
+    backgroundColor:['#C97B63','#E5A490','#3F3F46','#71717A','#D4D4D8','#FCFAF8']
   }]},
   options:{ plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{ size:10 } } } }, cutout:'62%' }
 });
@@ -61,7 +61,7 @@ const orders = [
   { id:'MYA482899', customer:'Ritu Kapoor', date:'23 Jul', total:8900, status:'Delivered' },
   { id:'MYA482887', customer:'Sneha Iyer', date:'22 Jul', total:21400, status:'Cancelled' }
 ];
-const OSTYLE = { Delivered:'text-green-800 bg-green-800/10', Processing:'text-[var(--gold-deep)] bg-[var(--gold)]/15', Shipped:'text-blue-800 bg-blue-800/10', Cancelled:'text-[var(--maroon)] bg-[var(--maroon)]/10' };
+const OSTYLE = { Delivered:'text-green-800 bg-green-800/10', Processing:'text-[#C97B63] bg-[#C97B63]/10', Shipped:'text-blue-800 bg-blue-800/10', Cancelled:'text-red-700 bg-red-700/10' };
 document.getElementById('orders-table').innerHTML = `
   <thead><tr class="text-left text-xs opacity-50 border-b border-[var(--line-soft)]">
     <th class="py-3 font-normal">Order</th><th class="py-3 font-normal">Customer</th><th class="py-3 font-normal">Date</th><th class="py-3 font-normal">Total</th><th class="py-3 font-normal">Status</th>
@@ -97,11 +97,11 @@ document.getElementById('inventory-table').innerHTML = `
   </tr></thead>
   <tbody>
     ${inv.map(p=>`
-      <tr class="border-b border-[var(--line-soft)] last:border-0 ${p.stock<6?'bg-[var(--maroon)]/5':''}">
+      <tr class="border-b border-[var(--line-soft)] last:border-0 ${p.stock<6?'bg-red-700/5':''}">
         <td class="py-3 flex items-center gap-3"><img src="${p.img1}" class="w-8 h-10 object-cover rounded-sm" alt="${p.name}"/><span class="line-clamp-1 max-w-[180px]">${p.name}</span></td>
         <td class="py-3 opacity-70 capitalize">${p.category}</td>
         <td class="py-3">${formatINR(p.price)}</td>
-        <td class="py-3 ${p.stock<6?'text-[var(--maroon)] font-medium':''}">${p.stock}</td>
-        <td class="py-3"><span class="text-xs px-2.5 py-1 rounded-full ${p.stock===0?'bg-[var(--maroon)]/10 text-[var(--maroon)]':p.stock<6?'bg-[var(--gold)]/15 text-[var(--gold-deep)]':'bg-green-800/10 text-green-800'}">${p.stock===0?'Out of Stock':p.stock<6?'Low Stock':'In Stock'}</span></td>
+        <td class="py-3 ${p.stock<6?'text-red-700 font-medium':''}">${p.stock}</td>
+        <td class="py-3"><span class="text-xs px-2.5 py-1 rounded-full ${p.stock===0?'bg-red-700/10 text-red-700':p.stock<6?'bg-[#C97B63]/10 text-[#C97B63]':'bg-green-800/10 text-green-800'}">${p.stock===0?'Out of Stock':p.stock<6?'Low Stock':'In Stock'}</span></td>
       </tr>`).join('')}
   </tbody>`;
