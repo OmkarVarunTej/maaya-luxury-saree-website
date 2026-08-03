@@ -7,52 +7,19 @@ renderNavbar('shop');
 renderFooter();
 
 const params = new URLSearchParams(location.search);
-const searchVal = params.get('search');
-let initCat = params.get('cat') || 'all';
-let initOcc = params.get('occasion') || 'all';
-let initFabric = params.get('fabric') || 'all';
-let initSearch = searchVal || null;
-
-if (searchVal) {
-  const q = searchVal.trim().toLowerCase();
-  
-  // Try mapping search query to category
-  const matchedCat = CATEGORIES.find(c => c.id.toLowerCase() === q || c.name.toLowerCase().includes(q));
-  if (matchedCat) {
-    initCat = matchedCat.id;
-    initSearch = null;
-  } else {
-    // Try mapping search query to fabric
-    const matchedFabric = FABRICS.find(f => f.toLowerCase() === q || f.toLowerCase().includes(q));
-    if (matchedFabric) {
-      initFabric = matchedFabric;
-      initSearch = null;
-    } else {
-      // Try mapping search query to occasion
-      const matchedOcc = OCCASIONS.find(o => o.id.toLowerCase() === q || o.name.toLowerCase().includes(q));
-      if (matchedOcc) {
-        initOcc = matchedOcc.id;
-        initSearch = null;
-      }
-    }
-  }
-}
-
 const state = {
-  cat: initCat,
-  occasion: initOcc,
-  fabric: initFabric,
-  search: initSearch,
-  filter: params.get('filter') || null,
+  cat: params.get('cat') || 'all',
+  occasion: params.get('occasion') || 'all',
+  fabric: params.get('fabric') || 'all',
+  search: params.get('search') || null,
+  filter: params.get('filter') || null, // 'new'
   minPrice: 0, maxPrice: 100000,
-  colors: [], minRating: 0,
+  minRating: 0,
   sort: 'featured',
   view: 'grid',
   page: 1,
   perPage: 9
 };
-
-const ALL_COLORS = [...new Map(PRODUCTS.flatMap(p=>p.colors).map(c=>[c.name,c])).values()];
 
 /* ---------------- Page header ---------------- */
 function updateHeader(){
@@ -62,6 +29,8 @@ function updateHeader(){
   if (state.search) { title = `Search Results for "${state.search}"`; crumb = `Search: ${state.search}`; }
   else if (cat){ title = cat.name; crumb = cat.name; }
   else if (state.filter==='new'){ title = 'New Arrivals'; crumb = 'New Arrivals'; }
+  else if (state.filter==='today'){ title = "Today's Collection"; crumb = "Today's Collection"; }
+  else if (state.filter==='sale'){ title = "Ashadam Sale Special"; crumb = "Sale"; }
   else if (occ){ title = occ.name + ' Sarees'; crumb = occ.name; }
   else if (state.fabric !== 'all'){ title = state.fabric + ' Sarees'; crumb = state.fabric; }
   document.getElementById('page-title').textContent = title;
@@ -72,66 +41,50 @@ function updateHeader(){
 function filtersHTML(){
   return `
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Category</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Category</div>
       <div class="space-y-2.5">
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="cat" value="all" ${state.cat==='all'?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> All Sarees
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="cat" value="all" ${state.cat==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Sarees
         </label>
         ${CATEGORIES.map(c=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="cat" value="${c.id}" ${state.cat===c.id?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> ${c.name}
-          <span class="ml-auto text-[#C97B63] text-xs font-semibold">${c.count}</span>
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="cat" value="${c.id}" ${state.cat===c.id?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${c.name}
+          <span class="ml-auto text-[#7A1F3D] text-xs font-semibold">${c.count}</span>
         </label>`).join('')}
       </div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Price Range</div>
-      <input type="range" id="price-range" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#C97B63]"/>
-      <div class="flex justify-between text-xs text-[#C97B63]"><span>₹0</span><span id="price-val" class="font-bold text-[#C97B63]">${formatINR(state.maxPrice)}</span></div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Price Range</div>
+      <input type="range" id="price-range" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#7A1F3D]"/>
+      <div class="flex justify-between text-xs text-[#7A1F3D]"><span>₹0</span><span id="price-val" class="font-bold text-[#7A1F3D]">${formatINR(state.maxPrice)}</span></div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Fabric</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Fabric</div>
       <div class="space-y-2.5">
         ${FABRICS.map(f=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="fabric" value="${f}" ${state.fabric===f?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> ${f}
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="fabric" value="${f}" ${state.fabric===f?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${f}
         </label>`).join('')}
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="fabric" value="all" ${state.fabric==='all'?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> All Fabrics
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="fabric" value="all" ${state.fabric==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Fabrics
         </label>
       </div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Colour</div>
-      <div class="flex flex-wrap gap-2.5">
-        ${ALL_COLORS.map(c=>`
-        <button data-color="${c.name}" title="${c.name}" class="color-swatch w-7 h-7 rounded-full border-2 ${state.colors.includes(c.name)?'border-[#C97B63] scale-110':'border-[#EAEAEA]'}" style="background:${c.hex}"></button>`).join('')}
-      </div>
-    </div>
-    <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Occasion</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Occasion</div>
       <div class="space-y-2.5">
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="occasion" value="all" ${state.occasion==='all'?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> All Occasions
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="occasion" value="all" ${state.occasion==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Occasions
         </label>
         ${OCCASIONS.map(o=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="occasion" value="${o.id}" ${state.occasion===o.id?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/> ${o.name}
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
+          <input type="checkbox" name="occasion" value="${o.id}" ${state.occasion===o.id?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${o.name}
         </label>`).join('')}
       </div>
     </div>
-    <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#3F3F46] font-bold mb-4">Rating</div>
-      <div class="space-y-2.5">
-        ${[4,3,0].map(r=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#3F3F46] hover:text-[#C97B63] transition-colors">
-          <input type="checkbox" name="rating" value="${r}" ${state.minRating===r?'checked':''} class="accent-[#C97B63] rounded border-gray-300 w-4 h-4"/>
-          ${r>0 ? `<span class="stars text-[#C97B63]">${'★'.repeat(r)}${'☆'.repeat(5-r)}</span> & up` : 'All Ratings'}
-        </label>`).join('')}
-      </div>
-    </div>
+
     <div class="mb-4">
-      <button id="clear-filters" class="w-full btn border border-[#C97B63] text-[#C97B63] hover:bg-[#C97B63] hover:text-[#FFFFFF] text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
+      <button id="clear-filters" class="w-full btn border border-[#7A1F3D] text-[#7A1F3D] hover:bg-[#7A1F3D] hover:text-[#FFFFFF] text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
     </div>
   `;
 }
@@ -155,15 +108,7 @@ function bindFilterEvents(){
     state.occasion = e.target.checked ? e.target.value : 'all';
     state.page = 1; sync();
   }));
-  document.querySelectorAll('input[name=rating]').forEach(el=>el.addEventListener('change', e=>{
-    state.minRating = e.target.checked ? Number(e.target.value) : 0;
-    state.page = 1; sync();
-  }));
-  document.querySelectorAll('.color-swatch').forEach(el=>el.addEventListener('click', ()=>{
-    const c = el.dataset.color;
-    state.colors = state.colors.includes(c) ? state.colors.filter(x=>x!==c) : [...state.colors, c];
-    state.page = 1; sync();
-  }));
+
   document.querySelectorAll('#price-range').forEach(el=>{
     el.addEventListener('input', e=>{
       state.maxPrice = Number(e.target.value);
@@ -172,7 +117,7 @@ function bindFilterEvents(){
     el.addEventListener('change', ()=>{ state.page=1; sync(); });
   });
   document.querySelectorAll('#clear-filters, #clear-filters-empty').forEach(el=>el && el.addEventListener('click', ()=>{
-    Object.assign(state, { cat:'all', occasion:'all', fabric:'all', filter:null, maxPrice:55000, colors:[], minRating:0, page:1 });
+    Object.assign(state, { cat:'all', occasion:'all', fabric:'all', filter:null, maxPrice:55000, minRating:0, page:1 });
     sync();
   }));
 }
@@ -182,13 +127,14 @@ function getFiltered(){
   let list = PRODUCTS.slice();
   if (state.search) {
     const q = state.search.toLowerCase();
-    list = list.filter(p=> p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.fabric.toLowerCase().includes(q) || p.occasion.toLowerCase().includes(q) );
+    list = list.filter(p=> p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.fabric.toLowerCase().includes(q) || p.occasion.toLowerCase().includes(q) || p.colors.some(c=>c.name.toLowerCase().includes(q)) );
   }
   if (state.filter === 'new') list = list.filter(p=>p.isNew);
+  if (state.filter === 'today') list = list.filter(p=>p.isNewToday);
+  if (state.filter === 'sale') list = list.filter(p=>p.discount > 0);
   if (state.cat !== 'all') list = list.filter(p=>p.category===state.cat);
   if (state.occasion !== 'all') list = list.filter(p=>p.occasion===state.occasion);
   if (state.fabric !== 'all') list = list.filter(p=>p.fabric===state.fabric);
-  if (state.colors.length) list = list.filter(p=>p.colors.some(c=>state.colors.includes(c.name)));
   if (state.minRating) list = list.filter(p=>p.rating >= state.minRating);
   list = list.filter(p=>p.price <= state.maxPrice);
 
@@ -206,18 +152,9 @@ function getFiltered(){
 function renderChips(){
   const chips = [];
   if (state.search) chips.push({label:`"${state.search}"`, clear:()=>state.search=null});
-  if (state.cat!=='all'){
-    const c = CATEGORIES.find(x=>x.id===state.cat);
-    const label = c ? c.name : (state.cat.charAt(0).toUpperCase() + state.cat.slice(1) + ' Sarees');
-    chips.push({label, clear:()=>state.cat='all'});
-  }
-  if (state.occasion!=='all'){
-    const o = OCCASIONS.find(x=>x.id===state.occasion);
-    const label = o ? o.name : (state.occasion.charAt(0).toUpperCase() + state.occasion.slice(1));
-    chips.push({label, clear:()=>state.occasion='all'});
-  }
+  if (state.cat!=='all'){ const c = CATEGORIES.find(x=>x.id===state.cat); chips.push({label:c.name, clear:()=>state.cat='all'}); }
+  if (state.occasion!=='all'){ const o = OCCASIONS.find(x=>x.id===state.occasion); chips.push({label:o.name, clear:()=>state.occasion='all'}); }
   if (state.fabric!=='all') chips.push({label:state.fabric, clear:()=>state.fabric='all'});
-  state.colors.forEach(c=>chips.push({label:c, clear:()=>state.colors=state.colors.filter(x=>x!==c)}));
   if (state.minRating) chips.push({label:`${state.minRating}★ & up`, clear:()=>state.minRating=0});
   if (state.maxPrice < 55000) chips.push({label:`Under ${formatINR(state.maxPrice)}`, clear:()=>state.maxPrice=55000});
 
@@ -256,7 +193,7 @@ function renderGrid(){
         </div>
         <div class="flex-1 min-w-0 flex flex-col">
           <div class="font-heading text-lg md:text-xl mb-1">${p.name}</div>
-          <div class="stars mb-2">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))} <span class="text-xs opacity-50 font-body">(${p.reviews})</span></div>
+
           <p class="text-sm opacity-60 line-clamp-2 mb-3 hidden md:block">${p.description}</p>
           <div class="mt-auto flex items-baseline gap-2">
             <span class="font-sans text-xl font-bold text-black">${formatINR(p.price)}</span>
@@ -275,7 +212,7 @@ function renderGrid(){
   if (totalPages <= 1){ pag.innerHTML=''; return; }
   let html = '';
   for (let i=1;i<=totalPages;i++){
-    html += `<button data-page="${i}" class="w-9 h-9 text-sm rounded-full border ${i===state.page?'bg-[#C97B63] text-white border-[#C97B63]':'border-[var(--line)] hover:border-[var(--gold)]'}">${i}</button>`;
+    html += `<button data-page="${i}" class="w-9 h-9 text-sm rounded-full border ${i===state.page?'bg-[#7A1F3D] text-white border-[#7A1F3D]':'border-[var(--line)] hover:border-[var(--gold)]'}">${i}</button>`;
   }
   pag.innerHTML = html;
   pag.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click', ()=>{

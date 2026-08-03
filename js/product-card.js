@@ -3,24 +3,40 @@ import { Wishlist } from './store.js';
 
 export function productCardHTML(p, i=0){
   const wished = Wishlist.has(p.id);
-  const badge = p.discount ? `<span class="pc-badge">-${p.discount}%</span>` : (p.isNew ? `<span class="pc-badge" style="background:var(--gold-deep)">New</span>` : '');
+  
+  let badges = '';
+  let topOffset = 14;
+  if (p.isNewToday) {
+    badges += `<span class="pc-badge pc-badge-primary" style="background:#7A1F3D; color:#FFFFFF; font-weight:700; top:${topOffset}px">JUST ARRIVED</span>`;
+    topOffset += 28;
+  } else if (p.isNew) {
+    badges += `<span class="pc-badge pc-badge-primary" style="background:#7A1F3D; color:#FFFFFF; top:${topOffset}px">NEW TODAY</span>`;
+    topOffset += 28;
+  } else if (p.discount) {
+    badges += `<span class="pc-badge pc-badge-primary" style="top:${topOffset}px">-${p.discount}%</span>`;
+    topOffset += 28;
+  }
+  
+  if (p.stock > 0 && p.stock <= 5) {
+    badges += `<span class="pc-badge pc-badge-stock" style="background:#7A1F3D; color:#FFFFFF; top:${topOffset}px">Only ${p.stock} Left</span>`;
+  } else if (p.stock === 0) {
+    badges += `<span class="pc-badge pc-badge-stock" style="background:#2F2A28; color:#FFFFFF; top:${topOffset}px">SOLD OUT</span>`;
+  }
+
   return `
   <div class="product-card reveal-scale" style="--i:${i%4}">
     <a href="product.html?slug=${p.slug}" class="pc-media block">
       <img class="primary" src="${p.img1}" alt="${p.name}" loading="lazy"/>
       <img class="hover" src="${p.img2}" alt="" loading="lazy"/>
-      ${badge}
+      ${badges}
       <button data-wish="${p.id}" class="pc-wishlist ${wished?'active':''}" aria-label="Add to wishlist">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="${wished?'currentColor':'none'}"><path d="M12 21s-7.5-4.7-10-9.3C.5 8 2.2 4.5 6 4c2.1-.3 4 .8 6 3 2-2.2 3.9-3.3 6-3 3.8.5 5.5 4 4 7.7C19.5 16.3 12 21 12 21z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
       </button>
       <div class="pc-quickview" data-quickview="${p.slug}">Quick View</div>
     </a>
     <div class="pt-4 px-3.5">
-      <a href="product.html?slug=${p.slug}" class="block font-heading text-[0.98rem] leading-snug text-[#3F3F46] hover:text-[#C97B63] transition line-clamp-2">${p.name}</a>
-      <div class="flex items-center gap-1 mt-1.5 text-[#C97B63]">
-        <span class="stars">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))}</span>
-        <span class="text-xs opacity-70">(${p.reviews})</span>
-      </div>
+      <a href="product.html?slug=${p.slug}" class="block font-heading text-[0.98rem] leading-snug text-[#2F2A28] hover:text-[#7A1F3D] transition line-clamp-2">${p.name}</a>
+
       <div class="flex items-baseline gap-2 mt-1.5">
         <span class="font-sans text-lg text-black font-bold">${formatINR(p.price)}</span>
         ${p.oldPrice ? `<span class="text-xs opacity-80 line-through">${formatINR(p.oldPrice)}</span>` : ''}
@@ -64,11 +80,11 @@ export function initQuickView(PRODUCTS, Cart, toast){
       <div class="absolute inset-0 bg-black/60" data-qv-close></div>
       <div class="relative bg-[var(--cream)] max-w-3xl w-full rounded-sm overflow-hidden grid md:grid-cols-2 max-h-[90vh] overflow-y-auto">
         <div class="aspect-[3/4] md:aspect-auto"><img src="${p.img1}" class="w-full h-full object-cover" alt="${p.name}"/></div>
-        <div class="p-6 md:p-8 relative text-[#3F3F46]">
-          <button data-qv-close class="absolute top-4 right-4 p-1 text-[#3F3F46] hover:text-[#C97B63]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <div class="p-6 md:p-8 relative text-[#2F2A28]">
+          <button data-qv-close class="absolute top-4 right-4 p-1 text-[#2F2A28] hover:text-[#7A1F3D]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5"/></svg></button>
           <div class="eyebrow mb-2">${p.category}</div>
           <div class="font-heading text-2xl mb-2">${p.name}</div>
-          <div class="stars mb-3">${'★'.repeat(Math.round(p.rating))}${'☆'.repeat(5-Math.round(p.rating))} <span class="text-xs opacity-50 font-body">(${p.reviews} reviews)</span></div>
+
           <div class="flex items-baseline gap-2 mb-4">
             <span class="font-sans text-2xl font-bold text-black">${formatINR(p.price)}</span>
             ${p.oldPrice ? `<span class="text-sm opacity-80 line-through">${formatINR(p.oldPrice)}</span>` : ''}

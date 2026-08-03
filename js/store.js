@@ -70,8 +70,8 @@ export function toast(msg, sub=''){
   const el = document.createElement('div');
   el.className = 'toast';
   el.innerHTML = `
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#C97B63" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div><div style="font-size:0.88rem;font-weight:700;color:#C97B63;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#3F3F46;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#7A1F3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><div style="font-size:0.88rem;font-weight:700;color:#7A1F3D;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#2F2A28;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
   `;
   root.appendChild(el);
   requestAnimationFrame(()=>el.classList.add('show'));
@@ -79,9 +79,28 @@ export function toast(msg, sub=''){
 }
 
 export function initNavbarScroll(){
-  const nav = document.querySelector('.navbar');
-  if (!nav) return;
-  const onScroll = ()=> nav.classList.toggle('scrolled', window.scrollY > 40);
+  const root = document.getElementById('navbar-root');
+  const header = document.querySelector('.crystal-glass-navbar');
+  const saleBar = document.getElementById('sale-announcement-bar');
+  const categoryBar = document.getElementById('sticky-category-bar');
+  const onScroll = ()=>{
+    const isScrolled = window.scrollY > 40;
+    if (root) root.classList.toggle('scrolled', isScrolled);
+    if (header) header.classList.toggle('scrolled', isScrolled);
+    if (saleBar) {
+      saleBar.style.maxHeight = isScrolled ? '0' : '50px';
+      saleBar.style.paddingTop = isScrolled ? '0' : '';
+      saleBar.style.paddingBottom = isScrolled ? '0' : '';
+      saleBar.style.opacity = isScrolled ? '0' : '1';
+    }
+    if (categoryBar) {
+      categoryBar.style.maxHeight = isScrolled ? '0' : '52px';
+      categoryBar.style.paddingTop = isScrolled ? '0' : '';
+      categoryBar.style.paddingBottom = isScrolled ? '0' : '';
+      categoryBar.style.opacity = isScrolled ? '0' : '1';
+      categoryBar.style.overflow = 'hidden';
+    }
+  };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive:true });
 }
@@ -116,7 +135,61 @@ export function initSearch(){
   const form = document.querySelector('[data-search-form]');
   const results = document.querySelector('[data-search-results]');
   if (!overlay) return;
-  const open = ()=>{ overlay.classList.remove('hidden'); requestAnimationFrame(()=>overlay.classList.add('open')); input?.focus(); };
+
+  const renderSuggestions = () => {
+    if (!results) return;
+    results.innerHTML = `
+      <div class="p-5 text-[#2F2A28] border-t border-[#E7DED3]/30">
+        <div class="text-[10px] uppercase tracking-[0.25em] text-[#2F2A28]/50 font-bold mb-3">Suggested Searches</div>
+        <div class="flex flex-wrap gap-2">
+          ${[
+            { label: "Wedding Sarees", query: "wedding" },
+            { label: "Banarasi", query: "banarasi" },
+            { label: "Cotton", query: "cotton" },
+            { label: "Purple", query: "purple" },
+            { label: "Under ₹3,000", query: "under 3000", action: () => { location.href = "shop.html?maxPrice=3000"; } },
+            { label: "Today's Collection", query: "today", action: () => { location.href = "shop.html?filter=today"; } }
+          ].map((s, idx) => `
+            <button type="button" data-suggestion="${idx}" class="text-xs border border-[#E7DED3] hover:border-[#7A1F3D] hover:text-[#7A1F3D] px-4 py-2 rounded-full transition-all bg-[#FCFAF7] font-medium">
+              ${s.label}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    results.querySelectorAll('[data-suggestion]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const items = [
+          { label: "Wedding Sarees", query: "wedding" },
+          { label: "Banarasi", query: "banarasi" },
+          { label: "Cotton", query: "cotton" },
+          { label: "Purple", query: "purple" },
+          { label: "Under ₹3,000", query: "under 3000", action: () => { location.href = "shop.html?maxPrice=3000"; } },
+          { label: "Today's Collection", query: "today", action: () => { location.href = "shop.html?filter=today"; } }
+        ];
+        const s = items[Number(btn.dataset.suggestion)];
+        if (s.action) {
+          s.action();
+        } else {
+          if (input) {
+            input.value = s.query;
+            const event = new Event('input', { bubbles: true });
+            input.dispatchEvent(event);
+          }
+        }
+      });
+    });
+  };
+
+  const open = ()=>{
+    overlay.classList.remove('hidden');
+    requestAnimationFrame(()=>overlay.classList.add('open'));
+    if (input) {
+      input.value = '';
+      input.focus();
+      renderSuggestions();
+    }
+  };
   const close = ()=>{ overlay.classList.remove('open'); setTimeout(()=>overlay.classList.add('hidden'),300); };
   triggers.forEach(t => t.addEventListener('click', open));
   overlay.addEventListener('click', (e)=>{ if (e.target===overlay) close(); });
@@ -137,6 +210,7 @@ export function initSearch(){
   input?.addEventListener('input', ()=>{
     const q = input.value.trim().toLowerCase();
     if (!results) return;
+    if (q.length === 0) { renderSuggestions(); return; }
     if (q.length < 2){ results.innerHTML=''; return; }
     const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.includes(q) || p.fabric.toLowerCase().includes(q) || (p.category+' '+p.fabric).toLowerCase().includes(q) || ['wedding sarees','silk sarees','banarasi','cotton sarees','party wear','designer collection'].some(n=>n.includes(q)&&p.category===n.split(' ')[0].toLowerCase())).slice(0,6);
     results.innerHTML = matches.length ? matches.map(p=>`

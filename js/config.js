@@ -32,6 +32,13 @@ export const FABRICS = ["Silk","Cotton","Linen","Organza","Georgette","Chiffon"]
 
 const LOCAL_IMGS = [
   "images/saree_model_5.png",
+  "images/teal_saree.png",
+  "images/saree_5.jpg",
+  "images/saree_7.jpg",
+  "images/saree_15.jpg",
+  "images/saree_16.jpg",
+  "images/saree_21.jpg",
+  "images/saree_22.jpg",
   "images/saree_model_6.png",
   "images/saree_model_7.png",
   "images/saree_model_4.png",
@@ -41,30 +48,7 @@ const LOCAL_IMGS = [
   "images/cat_cotton.png",
   "images/cat_party.png",
   "images/cat_designer.png",
-  "images/saree_1.jpg",
-  "images/saree_2.jpg",
-  "images/saree_3.jpg",
-  "images/saree_4.jpg",
-  "images/saree_5.jpg",
-  "images/saree_7.jpg",
-  "images/saree_8.jpg",
-  "images/saree_9.jpg",
-  "images/saree_10.jpg",
-  "images/saree_11.jpg",
-  "images/saree_12.jpg",
-  "images/saree_13.jpg",
-  "images/saree_14.jpg",
-  "images/saree_15.jpg",
-  "images/saree_16.jpg",
-  "images/saree_17.jpg",
-  "images/saree_18.jpg",
-  "images/saree_19.jpg",
-  "images/saree_20.jpg",
-  "images/saree_21.jpg",
-  "images/saree_22.jpg",
-  "images/saree_23.jpg",
-  "images/saree_24.jpg",
-  "images/saree_25.jpg"
+  "images/luxury-model.png"
 ];
 
 function names(){
@@ -113,7 +97,7 @@ export const PRODUCTS = names().map((name,i)=>{
   const gallery = [0,1,2,3].map(k => LOCAL_IMGS[(i+k) % LOCAL_IMGS.length]);
   const rating = (3.8 + rnd()*1.2).toFixed(1);
   const reviews = Math.round(8 + rnd()*260);
-  const stock = i % 11 === 0 ? 0 : Math.round(2 + rnd()*40);
+  const stock = i % 11 === 0 ? 0 : (i % 3 === 0 ? ((i % 5) + 1) : Math.floor(6 + rnd()*35));
   return {
     id: `mv-${1000+i}`,
     slug: name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),
@@ -125,6 +109,7 @@ export const PRODUCTS = names().map((name,i)=>{
     price, oldPrice, discount,
     rating: Number(rating), reviews, stock,
     isNew: i % 6 === 0,
+    isNewToday: i % 5 === 0,
     isBestseller: i % 4 === 0,
     isTrending: i % 5 === 0,
     img1, img2, gallery,

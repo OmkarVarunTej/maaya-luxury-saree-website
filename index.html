@@ -1,463 +1,574 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MAAYA — Handwoven Luxury Sarees | Kanchipuram, Banarasi & Bridal Silk</title>
-<meta name="description" content="Discover MAAYA's curated collection of handwoven silk, Banarasi, and bridal sarees — heritage weaving reimagined for the modern woman."/>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = { theme: { extend: { colors: {
-    cream:'#FFFFFF', ivory:'#FCFAF8', champagne:'#FFFFFF', gold:'#C97B63', brown:'#3F3F46', maroon:'#C97B63'
-  }, fontFamily: { display:['Cormorant Garamond','serif'], heading:['Playfair Display','serif'], body:['DM Sans','sans-serif'], script:['Great Vibes','cursive'], cinzel:['Cinzel','serif'] } } } }
-</script>
-<link rel="stylesheet" href="css/main.css"/>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAAYA — Handwoven Luxury Sarees | Kanchipuram, Banarasi & Bridal Silk</title>
+  <meta name="description"
+    content="Discover MAAYA's curated collection of handwoven silk, Banarasi, and bridal sarees — heritage weaving reimagined for the modern woman." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FCFAF7', ivory: '#F7F3EE', champagne: '#FFFFFF', gold: '#C9A14A', brown: '#2F2A28', maroon: '#7A1F3D'
+          }, fontFamily: { display: ['Cormorant Garamond', 'serif'], heading: ['Playfair Display', 'serif'], body: ['DM Sans', 'sans-serif'], script: ['Great Vibes', 'cursive'], cinzel: ['Cinzel', 'serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 </head>
-<body class="bg-cream text-[#3F3F46] font-body">
 
-<div id="navbar-root">
-  <!-- Top Announcement Strip -->
-  <div class="bg-[#C97B63] text-white py-2 px-4 text-center text-xs md:text-sm font-semibold tracking-wide shadow-xs">
-    Ashadam Sale Exclusive Offer Up to 50% Off on Our Website & Live Shows!
-  </div>
+<body class="bg-cream text-[#2F2A28] font-body">
 
-  <!-- Main Navigation Header (Clean, Elegant, Light Theme) -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#EAEAEA] shadow-sm text-[#3F3F46]">
-    <div class="max-w-[1500px] mx-auto px-4 md:px-10 py-3.5 flex items-center justify-between">
-      
-      <!-- Left: Navigation Links (Shop All, Sarees, New Arrivals) -->
-      <div class="flex items-center gap-6 lg:gap-9">
-        <button data-mobile-toggle class="lg:hidden p-1.5 text-[#3F3F46] hover:text-[#C97B63] transition" aria-label="Open menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
+  <div id="navbar-root" class="fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300">
+    <!-- Top Announcement Strip (Full Width) -->
+    <a href="shop.html" id="sale-announcement-bar"
+      class="pointer-events-auto block bg-[#7A1F3D] hover:bg-[#8C2847] text-white py-1.5 px-4 text-center text-xs md:text-sm font-semibold tracking-wide shadow-xs transition-all duration-300 overflow-hidden">
+      Ashadam Sale Exclusive Offer Up to 50% Off on Our Website & Live Shows!
+    </a>
 
-        <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-[0.2em] uppercase">
-          <a href="shop.html" class="text-[#3F3F46] hover:text-[#C97B63] transition-colors py-1">SHOP ALL</a>
+    <!-- Floating Pure Crystal Glass Navbar -->
+    <div class="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 pt-3 pb-1">
+      <header class="crystal-glass-navbar pointer-events-auto text-[#2F2A28] rounded-[22px] px-4 md:px-8 py-3 flex items-center justify-between relative">
+        
+        <!-- Left: Navigation Links (Shop All, Sarees, New Arrivals) -->
+        <div class="flex items-center gap-6 lg:gap-9">
+          <button data-mobile-toggle class="lg:hidden p-1.5 text-[#2F2A28] hover:text-[#7A1F3D] glass-icon-btn transition"
+            aria-label="Open menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </button>
 
-          <!-- SAREES dropdown matching reference screenshot -->
-          <div class="relative has-mega group">
-            <a href="shop.html" class="text-[#3F3F46] hover:text-[#C97B63] flex items-center gap-1.5 py-1 transition-colors">
-              SAREES
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
-            </a>
-            
-            <!-- SAREES Sub-Menu Popup -->
-            <div class="mega-menu pt-3 left-0">
-              <div class="bg-white rounded-md shadow-2xl border border-gray-100 p-6 md:p-8 w-[580px] text-left text-gray-800">
-                <a href="shop.html" class="block font-bold text-[#C97B63] text-sm mb-4 hover:underline">All Sarees</a>
-                <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-xs font-medium text-gray-700">
-                  <ul class="space-y-2">
-                    <li><a href="shop.html?cat=kanchipuram" class="hover:text-[#C97B63] transition-colors py-0.5 block">Kanchipuram Pattu Sarees</a></li>
-                    <li><a href="shop.html?cat=banarasi" class="hover:text-[#C97B63] transition-colors py-0.5 block">Banarasi Sarees</a></li>
-                    <li><a href="shop.html?cat=tissue" class="hover:text-[#C97B63] transition-colors py-0.5 block">Tissue Sarees</a></li>
-                    <li><a href="shop.html?cat=georgette" class="hover:text-[#C97B63] transition-colors py-0.5 block">Georgette Sarees</a></li>
-                    <li><a href="shop.html?cat=silk" class="hover:text-[#C97B63] transition-colors py-0.5 block">Silk Sarees</a></li>
-                    <li><a href="shop.html?cat=fancy" class="hover:text-[#C97B63] transition-colors py-0.5 block">Fancy Sarees</a></li>
-                    <li><a href="shop.html?cat=cotton" class="hover:text-[#C97B63] transition-colors py-0.5 block">Cotton Sarees</a></li>
-                    <li><a href="shop.html?cat=softsilk" class="hover:text-[#C97B63] transition-colors py-0.5 block">Soft Silk Sarees</a></li>
-                    <li><a href="shop.html?cat=kathan" class="hover:text-[#C97B63] transition-colors py-0.5 block">Banarasi Kathan Silk Sarees</a></li>
-                    <li><a href="shop.html?cat=crepe" class="hover:text-[#C97B63] transition-colors py-0.5 block">Crepe Silk Sarees</a></li>
-                  </ul>
-                  <ul class="space-y-2">
-                    <li><a href="shop.html?cat=work" class="hover:text-[#C97B63] transition-colors py-0.5 block">Work Sarees</a></li>
-                    <li><a href="shop.html?cat=ikkat" class="hover:text-[#C97B63] transition-colors py-0.5 block">Ikkat Sarees</a></li>
-                    <li><a href="shop.html?cat=kuppadam" class="hover:text-[#C97B63] transition-colors py-0.5 block">Kuppadam Sarees</a></li>
-                    <li><a href="shop.html?cat=linen" class="hover:text-[#C97B63] transition-colors py-0.5 block">Linen Sarees</a></li>
-                    <li><a href="shop.html?cat=paithani" class="hover:text-[#C97B63] transition-colors py-0.5 block">Paithani Sarees</a></li>
-                    <li><a href="shop.html?cat=tussar" class="hover:text-[#C97B63] transition-colors py-0.5 block">Tussar Silk Sarees</a></li>
-                    <li><a href="shop.html?cat=gadwal" class="hover:text-[#C97B63] transition-colors py-0.5 block">Gadwal Sarees</a></li>
-                    <li><a href="shop.html?cat=chiniya" class="hover:text-[#C97B63] transition-colors py-0.5 block">Chiniya Silk Sarees</a></li>
-                    <li><a href="shop.html?cat=khaddi" class="hover:text-[#C97B63] transition-colors py-0.5 block">Khaddi Georgette Sarees</a></li>
-                    <li><a href="shop.html?cat=semipattu" class="hover:text-[#C97B63] transition-colors py-0.5 block">Semi Pattu Sarees</a></li>
-                    <li><a href="shop.html?cat=kota" class="hover:text-[#C97B63] transition-colors py-0.5 block">Silk Kota Sarees</a></li>
-                  </ul>
+          <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-[0.2em] uppercase">
+            <a href="shop.html" class="glass-nav-link text-[#2F2A28] hover:text-[#7A1F3D] transition-colors py-1">SHOP ALL</a>
+
+            <!-- SAREES dropdown matching reference screenshot -->
+            <div class="relative has-mega group">
+              <a href="shop.html"
+                class="glass-nav-link text-[#2F2A28] hover:text-[#7A1F3D] flex items-center gap-1.5 py-1 transition-colors">
+                SAREES
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </a>
+
+              <!-- SAREES Sub-Menu Popup -->
+              <div class="mega-menu pt-3 left-0">
+                <div
+                  class="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl border border-white/80 p-6 md:p-8 w-[580px] text-left text-gray-800">
+                  <a href="shop.html" class="block font-bold text-[#7A1F3D] text-sm mb-4 hover:underline">All Sarees</a>
+                  <div class="grid grid-cols-2 gap-x-8 gap-y-2 text-xs font-medium text-gray-700">
+                    <ul class="space-y-2">
+                      <li><a href="shop.html?cat=kanchipuram" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Kanchipuram Pattu Sarees</a></li>
+                      <li><a href="shop.html?cat=banarasi" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Banarasi Sarees</a></li>
+                      <li><a href="shop.html?cat=tissue" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Tissue Sarees</a></li>
+                      <li><a href="shop.html?cat=georgette" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Georgette Sarees</a></li>
+                      <li><a href="shop.html?cat=silk" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Silk Sarees</a></li>
+                      <li><a href="shop.html?cat=fancy" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Fancy Sarees</a></li>
+                      <li><a href="shop.html?cat=cotton" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Cotton Sarees</a></li>
+                      <li><a href="shop.html?cat=softsilk" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Soft Silk Sarees</a></li>
+                      <li><a href="shop.html?cat=kathan" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Banarasi Kathan Silk Sarees</a></li>
+                      <li><a href="shop.html?cat=crepe" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Crepe Silk Sarees</a></li>
+                    </ul>
+                    <ul class="space-y-2">
+                      <li><a href="shop.html?cat=work" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Work Sarees</a></li>
+                      <li><a href="shop.html?cat=ikkat" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Ikkat Sarees</a></li>
+                      <li><a href="shop.html?cat=kuppadam" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Kuppadam Sarees</a></li>
+                      <li><a href="shop.html?cat=linen" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Linen Sarees</a></li>
+                      <li><a href="shop.html?cat=paithani" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Paithani Sarees</a></li>
+                      <li><a href="shop.html?cat=tussar" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Tussar Silk Sarees</a></li>
+                      <li><a href="shop.html?cat=gadwal" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Gadwal Sarees</a></li>
+                      <li><a href="shop.html?cat=chiniya" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Chiniya Silk Sarees</a></li>
+                      <li><a href="shop.html?cat=khaddi" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Khaddi Georgette Sarees</a></li>
+                      <li><a href="shop.html?cat=semipattu" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Semi Pattu Sarees</a></li>
+                      <li><a href="shop.html?cat=kota" class="hover:text-[#7A1F3D] transition-colors py-0.5 block">Silk Kota Sarees</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <a href="shop.html?filter=new" class="glass-nav-link text-[#2F2A28] hover:text-[#7A1F3D] transition-colors py-1">NEW ARRIVALS</a>
+          </nav>
+        </div>
+
+        <!-- Center Logo: MAAYA in Terra-Cotta -->
+        <a href="index.html" class="flex flex-col items-center absolute left-1/2 -translate-x-1/2">
+          <span
+            class="font-serif text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-[#7A1F3D] leading-none"
+            style="font-family:'Playfair Display', serif;">MAAYA</span>
+          <span class="text-[8px] uppercase tracking-[0.3em] text-[#7A1F3D]/80 font-medium mt-1">ROYAL WEAVES</span>
+        </a>
+
+        <!-- Right: Search, Wishlist, Cart -->
+        <div class="flex items-center gap-4 md:gap-6">
+          <!-- Search Input Field -->
+          <div class="relative hidden md:block w-44 lg:w-56">
+            <input type="text" data-search-toggle placeholder="Search Sarees..." readonly
+              class="crystal-glass-search w-full pl-9 pr-4 py-1.5 text-xs text-[#2F2A28] placeholder:text-[#2F2A28]/60 cursor-pointer" />
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[#2F2A28]" width="14" height="14"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
           </div>
-          
-          <a href="shop.html?filter=new" class="text-[#3F3F46] hover:text-[#C97B63] transition-colors py-1">NEW ARRIVALS</a>
-        </nav>
-      </div>
 
-      <!-- Center Logo: MAAYA in Terra-Cotta -->
-      <a href="index.html" class="flex flex-col items-center group absolute left-1/2 -translate-x-1/2">
-        <span class="font-serif text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-[#C97B63] group-hover:text-[#b56952] transition-colors leading-none" style="font-family:'Playfair Display', serif;">MAAYA</span>
-        <span class="text-[8px] uppercase tracking-[0.3em] text-[#C97B63]/80 font-medium mt-1">ROYAL WEAVES</span>
-      </a>
+          <!-- Wishlist Icon -->
+          <a href="account.html?tab=wishlist" class="glass-icon-btn relative p-1 text-[#2F2A28] hover:text-[#7A1F3D] transition"
+            aria-label="Wishlist">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            <span data-wish-count
+              class="hidden absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-[#7A1F3D] text-white text-[10px] font-bold flex items-center justify-center">0</span>
+          </a>
 
-      <!-- Right: Search, Wishlist, Cart -->
-      <div class="flex items-center gap-4 md:gap-6">
-        <!-- Search Input Field -->
-        <div class="relative hidden md:block w-44 lg:w-56">
-          <input type="text" data-search-toggle placeholder="Search here..." readonly class="w-full bg-black/5 rounded-full pl-9 pr-4 py-1.5 text-xs text-[#3F3F46] placeholder:text-[#3F3F46]/50 border border-[#EAEAEA] cursor-pointer hover:border-[#C97B63] transition" />
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[#3F3F46]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <!-- Shopping Bag Icon -->
+          <a href="cart.html" class="glass-icon-btn relative p-1 text-[#2F2A28] hover:text-[#7A1F3D] transition" aria-label="Cart">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span data-cart-count
+              class="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-[#7A1F3D] text-white text-[10px] font-bold flex items-center justify-center">0</span>
+          </a>
         </div>
 
-        <!-- Wishlist Icon -->
-        <a href="account.html?tab=wishlist" class="relative p-1 text-[#3F3F46] hover:text-[#C97B63] transition" aria-label="Wishlist">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          <span data-wish-count class="hidden absolute -top-1 -right-1.5 w-4 h-4 rounded-full bg-[#C97B63] text-white text-[10px] font-bold flex items-center justify-center">0</span>
-        </a>
-
-        <!-- Shopping Bag Icon -->
-        <a href="cart.html" class="relative p-1 text-[#3F3F46] hover:text-[#C97B63] transition" aria-label="Cart">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span data-cart-count class="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-[#C97B63] text-white text-[10px] font-bold flex items-center justify-center">0</span>
-        </a>
-      </div>
-
-    </div>
-  </header>
-</div>
-
-<!-- HERO BANNER (3-Column Premium Luxury Composition) -->
-<section class="relative w-full min-h-[92vh] lg:min-h-screen flex items-center overflow-hidden bg-white text-[#3F3F46] py-12 lg:py-0 shadow-xs grain">
-  <!-- Layered Ambient Backgrounds -->
-  <div class="absolute inset-0 bg-gradient-to-br from-[#FFFFFF] via-[#FCFAF8] to-[#FFFFFF]"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(201,123,99,0.06)_0%,transparent_65%)] pointer-events-none"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(255,255,255,0.4)_100%)] pointer-events-none"></div>
-
-  <!-- Main 3-Column Container -->
-  <div class="relative max-w-[1500px] w-full mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center z-10 my-auto">
-    
-    <!-- LEFT COLUMN (35%): Editorial Content & CTA -->
-    <div class="lg:col-span-4 flex flex-col justify-center space-y-6 lg:space-y-7 text-left z-10" id="hero-left">
-      <span class="inline-flex items-center gap-2.5 text-[#C97B63] text-xs uppercase tracking-[0.3em] font-semibold" id="hero-eyebrow">
-        <span class="w-2 h-2 rounded-full bg-[#C97B63] animate-pulse"></span>
-        ✦ Royal Heritage Edit ✦
-      </span>
-
-      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] text-[#3F3F46] tracking-tight drop-shadow-sm" style="font-family: 'Playfair Display', serif;" id="hero-title">
-        Nine Yards of <br/>
-        <span class="font-script text-[#C97B63] text-5xl sm:text-6xl lg:text-7xl italic font-normal block -mt-1" style="font-family: 'Great Vibes', cursive;">Living Royalty</span>
-      </h1>
-
-      <p class="text-sm md:text-base text-[#3F3F46]/80 font-light leading-relaxed max-w-md" id="hero-sub">
-        Masterpieces hand-loomed over 40 days by master weavers across Kanchipuram and Varanasi. Woven with pure certified silk and real gold zari threads.
-      </p>
-
-      <!-- Buttons -->
-      <div class="flex flex-wrap items-center gap-4 pt-2" id="hero-cta">
-        <a href="shop.html" class="px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] text-white bg-[#C97B63] hover:bg-[#b56952] shadow-[0_10px_25px_rgba(201,123,99,0.2)] hover:shadow-[0_15px_35px_rgba(201,123,99,0.35)] hover:scale-[1.03] transition-all duration-300">
-          Explore Collection →
-        </a>
-        <a href="shop.html?cat=wedding" class="px-7 py-3.5 rounded-full text-xs font-medium uppercase tracking-[0.18em] text-[#C97B63] bg-transparent border border-[#C97B63] hover:bg-[#C97B63] hover:text-white transition-all duration-300 backdrop-blur-md">
-          Bridal Atelier
-        </a>
-      </div>
-
-      <!-- Trust Badges -->
-      <div class="pt-4 border-t border-[#EAEAEA] flex flex-wrap items-center gap-6 text-[11px] uppercase tracking-widest text-[#3F3F46]/60 font-medium">
-        <span>✦ 100% Silk Mark Certified</span>
-        <span>✦ Express Shipping</span>
       </div>
     </div>
+  </div>
 
-    <!-- CENTER COLUMN (30%): Featured Saree Model -->
-    <div class="lg:col-span-4 flex justify-center items-center relative z-20 my-4 lg:my-0" id="hero-center">
-      <div class="relative w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[390px] aspect-[3/4.2] mx-auto rounded-t-full border border-[#C97B63]/40 p-2.5 shadow-md bg-gradient-to-b from-zinc-100 to-transparent backdrop-blur-sm group">
-        <!-- Ambient Gold Glow Ring -->
-        <div class="absolute -inset-1.5 rounded-t-full bg-gradient-to-b from-[#C97B63]/15 via-[#C97B63]/5 to-transparent blur-xl pointer-events-none"></div>
-        
-        <!-- Center Model Image -->
-        <img src="luxury-model.png" alt="Royal Handwoven Silk Saree Model" class="w-full h-full object-cover object-top rounded-t-full shadow-md transition-transform duration-1000 group-hover:scale-[1.02]" id="hero-img"/>
-      </div>
+  <!-- HERO BANNER (3-Column Premium Luxury Composition) -->
+  <section
+    class="relative w-full min-h-[92vh] lg:min-h-screen flex items-center overflow-hidden bg-white text-[#2F2A28] pt-28 pb-12 lg:pt-32 lg:pb-0 shadow-xs grain">
+    <!-- Layered Ambient Backgrounds -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#FFFFFF] via-[#FCFAF7] to-[#FFFFFF]"></div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(122, 31, 61,0.06)_0%,transparent_65%)] pointer-events-none">
+    </div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_60%,rgba(255,255,255,0.4)_100%)] pointer-events-none">
     </div>
 
-    <!-- RIGHT COLUMN (35%): Promotional Privilege Card & Live Shows -->
-    <div class="lg:col-span-4 flex flex-col justify-center space-y-6 lg:space-y-7 z-10 text-left" id="hero-right">
-      <!-- Privilege Card -->
-      <div class="bg-white border border-[#EAEAEA] p-6 sm:p-8 rounded-2xl shadow-xs relative overflow-hidden group hover:border-[#C97B63]/40 transition-colors">
-        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#C97B63]/8 rounded-full blur-2xl pointer-events-none"></div>
-        
-        <div class="flex flex-wrap items-center justify-between gap-y-2 mb-4">
-          <span class="text-[10px] uppercase tracking-[0.25em] text-white font-bold bg-[#C97B63] border border-[#C97B63]/40 px-3 py-1 rounded-full shadow-md">✦ Ashadam Privilege ✦</span>
-          <span class="text-xs text-[#C97B63] font-extrabold tracking-wider">ENDS IN 2 DAYS</span>
-        </div>
+    <!-- Main 3-Column Container -->
+    <div
+      class="relative max-w-[1500px] w-full mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center z-10 my-auto">
 
-        <div class="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#C97B63] leading-none mb-3" style="font-family:'Cinzel', serif;">
-          UP TO 50% OFF
-        </div>
+      <!-- LEFT COLUMN: Editorial Content & CTA -->
+      <div class="lg:col-span-7 flex flex-col justify-center space-y-6 lg:space-y-7 text-left z-10" id="hero-left">
+        <span class="inline-flex items-center gap-2.5 text-[#7A1F3D] text-xs uppercase tracking-[0.3em] font-semibold"
+          id="hero-eyebrow">
+          <span class="w-2 h-2 rounded-full bg-[#7A1F3D] animate-pulse"></span>
+          ✦ Royal Heritage Edit ✦
+        </span>
 
-        <p class="text-xs md:text-sm text-[#3F3F46]/80 font-light leading-relaxed mb-6">
-          Exclusive seasonal savings across our entire Bridal, Kanchipuram & Heritage Banarasi collections.
+        <h1
+          class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] text-[#2F2A28] tracking-tight drop-shadow-sm"
+          style="font-family: 'Playfair Display', serif;" id="hero-title">
+          Nine Yards of <br />
+          <span class="font-script text-[#7A1F3D] text-5xl sm:text-6xl lg:text-7xl italic font-normal block -mt-1"
+            style="font-family: 'Great Vibes', cursive;">Living Royalty</span>
+        </h1>
+
+        <p class="text-sm md:text-base text-[#2F2A28]/80 font-light leading-relaxed max-w-md" id="hero-sub">
+          Masterpieces hand-loomed over 40 days by master weavers across Kanchipuram and Varanasi. Woven with pure
+          certified silk and real gold zari threads.
         </p>
 
-        <a href="shop.html?filter=sale" class="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl text-xs font-bold uppercase tracking-[0.2em] bg-[#C97B63] hover:bg-[#b56952] text-white border border-[#C97B63] hover:border-[#b56952] transition-all duration-300 shadow-md">
-          Claim Offer Now
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <!-- Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-2" id="hero-cta">
+          <a href="shop.html?filter=today"
+            class="px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] text-white bg-[#7A1F3D] hover:bg-[#8C2847] shadow-[0_10px_25px_rgba(122, 31, 61,0.2)] hover:shadow-[0_15px_35px_rgba(122, 31, 61,0.35)] hover:scale-[1.03] transition-all duration-300">
+            🛍 Shop Today's Collection
+          </a>
+          <a href="shop.html?cat=wedding"
+            class="px-7 py-3.5 rounded-full text-xs font-medium uppercase tracking-[0.18em] text-[#7A1F3D] bg-transparent border border-[#7A1F3D] hover:bg-[#7A1F3D] hover:text-white transition-all duration-300 backdrop-blur-md">
+            New Arrivals
+          </a>
+        </div>
+
+
+
+        <!-- Live Show Card integrated inside left column -->
+        <div class="pt-4 max-w-md">
+          <a href="shop.html?live=true"
+            class="bg-[#FCFAF7] border border-[#E7DED3] p-2 px-3.5 sm:px-4 rounded-xl flex items-center justify-between group hover:border-[#7A1F3D] hover:scale-[1.01] transition-all shadow-xs">
+            <div class="flex items-center gap-4">
+              <span class="relative flex h-3.5 w-3.5 shrink-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500"></span>
+              </span>
+              <div>
+                <div class="text-xs sm:text-sm font-bold text-[#2F2A28] uppercase tracking-wider">Live Shopping Event 📡
+                </div>
+                <div class="text-xs text-[#2F2A28]/80 font-light mt-0.5">Watch saree drapes & interact live</div>
+              </div>
+            </div>
+            <span
+              class="text-xs font-bold text-white bg-[#7A1F3D] px-3 py-1.5 rounded-lg group-hover:bg-[#8C2847] transition-all whitespace-nowrap ml-2">JOIN
+              NOW →</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Featured Saree Model -->
+      <div class="lg:col-span-5 flex justify-center items-center relative z-20 my-4 lg:my-0" id="hero-right">
+        <a href="shop.html"
+          class="relative w-full max-w-[340px] sm:max-w-[390px] lg:max-w-[420px] aspect-[3/4.2] mx-auto rounded-t-full border border-[#7A1F3D]/40 p-2.5 shadow-md bg-gradient-to-b from-zinc-100 to-transparent backdrop-blur-sm group block overflow-hidden"
+          aria-label="Shop the Look">
+          <!-- Ambient Gold Glow Ring -->
+          <div
+            class="absolute -inset-1.5 rounded-t-full bg-gradient-to-b from-[#7A1F3D]/15 via-[#7A1F3D]/5 to-transparent blur-xl pointer-events-none">
+          </div>
+
+          <!-- Center Model Image -->
+          <img src="luxury-model.png" alt="Royal Handwoven Silk Saree Model"
+            class="w-full h-full object-cover object-top rounded-t-full shadow-md transition-transform duration-1000 group-hover:scale-[1.02]"
+            id="hero-img" />
+
+          <!-- Shop the Look Overlay -->
+          <div
+            class="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-t-full">
+            <span
+              class="bg-white/95 text-[#2F2A28] text-xs font-bold uppercase tracking-[0.2em] px-6 py-3 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">Shop
+              The Collection →</span>
+          </div>
         </a>
       </div>
 
-      <!-- Live Show Card with 0.5rem Padding -->
-      <a href="shop.html?live=true" class="bg-[#FCFAF8] border border-[#EAEAEA] p-2 px-3.5 sm:px-4 rounded-xl flex items-center justify-between group hover:border-[#C97B63] hover:scale-[1.01] transition-all shadow-xs">
-        <div class="flex items-center gap-4">
-          <span class="relative flex h-3.5 w-3.5 shrink-0">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500"></span>
-          </span>
-          <div>
-            <div class="text-xs sm:text-sm font-bold text-[#3F3F46] uppercase tracking-wider">Live Shopping Event 📡</div>
-            <div class="text-xs text-[#3F3F46]/80 font-light mt-0.5">Watch saree drapes & interact live</div>
-          </div>
-        </div>
-        <span class="text-xs font-bold text-white bg-[#C97B63] px-3 py-1.5 rounded-lg group-hover:bg-[#b56952] transition-all whitespace-nowrap ml-2">JOIN NOW →</span>
-      </a>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- MARQUEE STRIP -->
-<div class="bg-[var(--brown-deep)] text-[var(--gold-light)] py-3 overflow-hidden border-y border-white/10">
-  <div class="marquee-track">
-    ${''}
-  </div>
-</div>
-<script>
-  document.currentScript.previousElementSibling.querySelector('.marquee-track').innerHTML =
-    Array(2).fill(['Handwoven Heritage','Complimentary Alterations','Pan-India Express Shipping','7-Day Easy Returns','Certified Handloom Silk'])
-    .flat().map(t=>`<span class="px-8 text-xs tracking-[0.2em] uppercase font-body whitespace-nowrap">${t} &nbsp;✦</span>`).join('');
-</script>
-
-<!-- FEATURED COLLECTIONS -->
-<section class="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
-  <div class="text-center mb-14 reveal">
-    <p class="eyebrow mb-3">Curated For You</p>
-    <h2 class="section-title text-4xl md:text-5xl">Featured Collections</h2>
-  </div>
-  <div id="collections-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"></div>
-</section>
-
-<!-- NEW ARRIVALS / BESTSELLERS / TRENDING TABS -->
-<section class="bg-[var(--ivory)] py-24 md:py-32">
-  <div class="max-w-[1400px] mx-auto px-6 md:px-10">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
-      <div>
-        <p class="eyebrow mb-3">Freshly Loomed</p>
-        <h2 class="section-title text-4xl md:text-5xl">Discover The Edit</h2>
-      </div>
-      <div class="flex gap-3" id="edit-tabs">
-        <button data-tab="new" class="edit-tab btn btn-outline text-[0.7rem] px-5 py-2.5">New Arrivals</button>
-        <button data-tab="best" class="edit-tab btn btn-outline text-[0.7rem] px-5 py-2.5">Best Sellers</button>
-        <button data-tab="trend" class="edit-tab btn btn-outline text-[0.7rem] px-5 py-2.5">Trending Now</button>
-      </div>
-    </div>
-    <div id="edit-grid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7"></div>
-  </div>
-</section>
-
-<!-- SHOP BY OCCASION -->
-<section class="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
-  <div class="text-center mb-14 reveal">
-    <p class="eyebrow mb-3">Every Moment, Draped Right</p>
-    <h2 class="section-title text-4xl md:text-5xl">Shop by Occasion</h2>
-  </div>
-  <div id="occasion-strip" class="flex gap-4 md:gap-6 overflow-x-auto pb-4 snap-x scrollbar-hide"></div>
-</section>
-
-<!-- FULL-BLEED EDITORIAL BANNER -->
-<section class="relative h-[70vh] min-h-[480px] overflow-hidden reveal-scale">
-  <img src="images/banarasi_banner.png" alt="Artisan hand-weaving a Banarasi silk saree on a traditional loom" class="w-full h-full object-cover"/>
-  <div class="absolute inset-0 bg-[var(--brown-deep)]/45 flex items-center">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-10 w-full">
-      <div class="max-w-lg text-white">
-        <p class="eyebrow text-[var(--gold-light)] mb-4">The Banarasi Story</p>
-        <h3 class="font-heading text-4xl md:text-5xl leading-tight mb-5">Nine Yards of Living Heritage</h3>
-        <p class="text-white/75 mb-8 font-light">Woven over 15–40 days by third-generation artisans in Varanasi, every Banarasi piece carries a story of patience and precision.</p>
-        <a href="shop.html?cat=banarasi" class="btn btn-outline-light btn-ripple">Explore Banarasi</a>
-      </div>
+  <!-- MARQUEE STRIP -->
+  <div class="bg-[var(--brown-deep)] text-[var(--gold-light)] py-3 overflow-hidden border-y border-white/10">
+    <div class="marquee-track">
+      ${''}
     </div>
   </div>
-</section>
+  <script>
+    document.currentScript.previousElementSibling.querySelector('.marquee-track').innerHTML =
+      Array(2).fill(['Handwoven Heritage', 'Complimentary Alterations', 'Pan-India Express Shipping', '7-Day Easy Returns', 'Certified Handloom Silk'])
+        .flat().map(t => `<span class="px-8 text-xs tracking-[0.2em] uppercase font-body whitespace-nowrap">${t} &nbsp;✦</span>`).join('');
+  </script>
 
-<!-- SHOP BY FABRIC -->
-<section class="bg-[var(--champagne)]/40 py-24 md:py-32">
-  <div class="max-w-[1400px] mx-auto px-6 md:px-10">
-    <div class="text-center mb-14 reveal">
-      <p class="eyebrow mb-3">Woven In</p>
-      <h2 class="section-title text-4xl md:text-5xl">Shop by Fabric</h2>
-    </div>
-    <div id="fabric-grid" class="grid grid-cols-3 md:grid-cols-6 gap-3 md:gap-5"></div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
-  <div class="text-center mb-14 reveal">
-    <p class="eyebrow mb-3">Words From Our Patrons</p>
-    <h2 class="section-title text-4xl md:text-5xl">Loved Across India</h2>
-  </div>
-  <div id="testimonial-grid" class="grid md:grid-cols-4 gap-6"></div>
-</section>
-
-<!-- INSTAGRAM -->
-<section class="pb-24 md:pb-32">
-  <div class="max-w-[1400px] mx-auto px-6 md:px-10 text-center mb-10 reveal">
-    <p class="eyebrow mb-3">@maaya.sarees</p>
-    <h2 class="section-title text-4xl md:text-5xl">Follow The Drape</h2>
-  </div>
-  <div id="insta-grid" class="grid grid-cols-4 md:grid-cols-8 gap-1.5 md:gap-2 px-1.5 md:px-2"></div>
-</section>
-
-
-
-<div id="footer-root">
-  <footer class="bg-[#FCFAF8] text-[#3F3F46] pt-14 pb-8 border-t border-[#EAEAEA] relative z-10 font-sans">
+  <!-- TODAY'S COLLECTION (NEW SECTION) -->
+  <section class="bg-[#FCFAF7] py-20 border-b border-[#E7DED3]" id="todays-collection-section">
     <div class="max-w-[1400px] mx-auto px-6 md:px-10">
-      
-      <!-- Top Grid: 5 Columns -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-        
-        <!-- Column 1: Brand & Contact -->
-        <div class="space-y-4">
-          <a href="index.html" class="inline-block">
-            <span class="font-serif text-3xl font-bold tracking-[0.2em] text-[#C97B63] block leading-none" style="font-family:'Playfair Display', serif;">MAAYA</span>
-            <span class="text-[10px] uppercase tracking-[0.3em] text-[#C97B63] font-bold mt-1 block">ROYAL WEAVES</span>
-          </a>
-          
-          <!-- Phone Box -->
-          <div class="flex items-center gap-3 pt-2">
-            <div class="w-10 h-10 rounded-full border border-[#C97B63]/30 flex items-center justify-center text-[#C97B63] bg-[#C97B63]/5 shrink-0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
+        <div>
+          <p class="eyebrow mb-3">✨ Today's Collection</p>
+          <h2 class="section-title text-4xl md:text-5xl">Discover Fresh Collection</h2>
+          <p class="text-xs text-[#2F2A28]/70 mt-2 font-light">Fresh arrivals added today. Limited stock available.</p>
+        </div>
+        <div>
+          <a href="shop.html?filter=today"
+            class="btn btn-outline text-xs px-6 py-3 uppercase tracking-wider font-bold">View Today's Collection →</a>
+        </div>
+      </div>
+
+      <!-- Product Grid for Today's Collection with Skeleton Loaders -->
+      <div id="todays-collection-grid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
+        <div class="animate-pulse flex flex-col gap-4">
+          <div class="bg-zinc-200 aspect-[3/4] w-full rounded-sm"></div>
+          <div class="h-4 bg-zinc-200 w-3/4 rounded-xs"></div>
+          <div class="h-4 bg-zinc-200 w-1/2 rounded-xs"></div>
+        </div>
+        <div class="animate-pulse flex flex-col gap-4">
+          <div class="bg-zinc-200 aspect-[3/4] w-full rounded-sm"></div>
+          <div class="h-4 bg-zinc-200 w-3/4 rounded-xs"></div>
+          <div class="h-4 bg-zinc-200 w-1/2 rounded-xs"></div>
+        </div>
+        <div class="animate-pulse flex flex-col gap-4">
+          <div class="bg-zinc-200 aspect-[3/4] w-full rounded-sm"></div>
+          <div class="h-4 bg-zinc-200 w-3/4 rounded-xs"></div>
+          <div class="h-4 bg-zinc-200 w-1/2 rounded-xs"></div>
+        </div>
+        <div class="animate-pulse flex flex-col gap-4">
+          <div class="bg-zinc-200 aspect-[3/4] w-full rounded-sm"></div>
+          <div class="h-4 bg-zinc-200 w-3/4 rounded-xs"></div>
+          <div class="h-4 bg-zinc-200 w-1/2 rounded-xs"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+  <!-- FEATURED COLLECTIONS -->
+  <section class="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-32">
+    <div class="text-center mb-14 reveal">
+      <p class="eyebrow mb-3">Curated For You</p>
+      <h2 class="section-title text-4xl md:text-5xl">Featured Collections</h2>
+    </div>
+    <div id="collections-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"></div>
+  </section>
+
+  <!-- NEW ARRIVALS / BESTSELLERS / TRENDING TABS -->
+  <section class="bg-[var(--ivory)] py-24 md:py-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
+        <div>
+          <p class="eyebrow mb-3">Freshly Loomed</p>
+          <h2 class="section-title text-4xl md:text-5xl">Discover The Edit</h2>
+        </div>
+        <div class="flex gap-3" id="edit-tabs">
+          <button data-tab="new" class="edit-tab btn btn-outline text-[0.7rem] px-5 py-2.5">New Arrivals</button>
+          <button data-tab="trend" class="edit-tab btn btn-outline text-[0.7rem] px-5 py-2.5">Trending Now</button>
+        </div>
+      </div>
+      <div id="edit-grid" class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7"></div>
+    </div>
+  </section>
+
+
+
+  <!-- FULL-BLEED EDITORIAL BANNER -->
+  <section class="relative h-[70vh] min-h-[480px] overflow-hidden reveal-scale">
+    <img src="images/banarasi_banner.png" alt="Artisan hand-weaving a Banarasi silk saree on a traditional loom"
+      class="w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-[var(--brown-deep)]/45 flex items-center">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-10 w-full">
+        <div class="max-w-lg text-white">
+          <p class="eyebrow text-[var(--gold-light)] mb-4">The Banarasi Story</p>
+          <h3 class="font-heading text-4xl md:text-5xl leading-tight mb-5">Nine Yards of Living Heritage</h3>
+          <p class="text-white/75 mb-8 font-light">Woven over 15–40 days by third-generation artisans in Varanasi, every
+            Banarasi piece carries a story of patience and precision.</p>
+          <a href="shop.html?cat=banarasi" class="btn btn-outline-light btn-ripple">Explore Banarasi</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- DEDICATED PREMIUM LIVE SHOPPING SECTION (NEW SECTION) -->
+  <section id="premium-live-section" class="max-w-[1400px] mx-auto px-6 md:px-10 py-20 border-t border-[#E7DED3]">
+    <!-- Rendered dynamically by home.js -->
+  </section>
+
+  <!-- TRUST SECTION (NEW SECTION) -->
+  <section id="trust-badge-grid" class="bg-[#FCFAF7] py-16 border-t border-b border-[#E7DED3]">
+    <!-- Rendered dynamically by home.js -->
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 text-center mb-10 reveal">
+      <p class="eyebrow mb-3">@maaya.sarees</p>
+      <h2 class="section-title text-4xl md:text-5xl">Follow The Drape</h2>
+    </div>
+    <div id="insta-grid" class="grid grid-cols-4 md:grid-cols-8 gap-1.5 md:gap-2 px-1.5 md:px-2"></div>
+  </section>
+
+
+
+  <div id="footer-root">
+    <footer class="bg-[#FCFAF7] text-[#2F2A28] pt-14 pb-8 border-t border-[#E7DED3] relative z-10 font-sans">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+
+        <!-- Top Grid: 5 Columns -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+
+          <!-- Column 1: Brand & Contact -->
+          <div class="space-y-4">
+            <a href="index.html" class="inline-block">
+              <span class="font-serif text-3xl font-bold tracking-[0.2em] text-[#7A1F3D] block leading-none"
+                style="font-family:'Playfair Display', serif;">MAAYA</span>
+              <span class="text-[10px] uppercase tracking-[0.3em] text-[#7A1F3D] font-bold mt-1 block">ROYAL
+                WEAVES</span>
+            </a>
+
+            <!-- Phone Box -->
+            <div class="flex items-center gap-3 pt-2">
+              <div
+                class="w-10 h-10 rounded-full border border-[#7A1F3D]/30 flex items-center justify-center text-[#7A1F3D] bg-[#7A1F3D]/5 shrink-0">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-xl font-bold text-[#2F2A28] tracking-tight">+91 98450 12345</div>
+              </div>
             </div>
-            <div>
-              <div class="text-xl font-bold text-[#3F3F46] tracking-tight">+91 98450 12345</div>
+
+            <ul class="space-y-2 text-sm text-[#2F2A28]/80 pt-1 font-normal">
+              <li><a href="mailto:hello@maaya.co.in"
+                  class="hover:text-[#7A1F3D] transition-colors">hello@maaya.co.in</a></li>
+              <li><a href="account.html" class="hover:text-[#7A1F3D] transition-colors">Track Your Order</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Stores</a></li>
+            </ul>
+
+            <!-- Social Icons -->
+            <div class="flex gap-3 pt-2">
+              <a href="#" aria-label="Facebook"
+                class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z" />
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram"
+                class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </a>
+              <a href="#" aria-label="YouTube"
+                class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              </a>
             </div>
           </div>
 
-          <ul class="space-y-2 text-sm text-[#3F3F46]/80 pt-1 font-normal">
-            <li><a href="mailto:hello@maaya.co.in" class="hover:text-[#C97B63] transition-colors">hello@maaya.co.in</a></li>
-            <li><a href="account.html" class="hover:text-[#C97B63] transition-colors">Track Your Order</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Stores</a></li>
-          </ul>
-
-          <!-- Social Icons -->
-          <div class="flex gap-3 pt-2">
-            <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#C97B63] hover:text-white hover:border-[#C97B63] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-            </a>
-            <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#C97B63] hover:text-white hover:border-[#C97B63] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="#" aria-label="YouTube" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#C97B63] hover:text-white hover:border-[#C97B63] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Column 2: Shop -->
-        <div>
-          <h3 class="text-base font-bold text-[#3F3F46] mb-3 relative pb-2 inline-block">
-            Shop
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#C97B63]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#3F3F46]/80 font-normal pt-1">
-            <li><a href="shop.html?cat=wedding" class="hover:text-[#C97B63] transition-colors">Festive</a></li>
-            <li><a href="shop.html?cat=wedding" class="hover:text-[#C97B63] transition-colors">Wedding</a></li>
-            <li><a href="shop.html?cat=party" class="hover:text-[#C97B63] transition-colors">Party</a></li>
-            <li><a href="shop.html?live=true" class="hover:text-[#C97B63] transition-colors">Video Call Shopping</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 3: GET TO KNOW US -->
-        <div>
-          <h3 class="text-base font-bold text-[#3F3F46] mb-3 relative pb-2 inline-block">
-            GET TO KNOW US
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#C97B63]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#3F3F46]/80 font-normal pt-1">
-            <li><a href="#" class="text-[#C97B63] font-medium hover:underline">FAQ</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Blog</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Awards</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Media</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Stores</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Virtual Tour</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 4: USER POLICY -->
-        <div>
-          <h3 class="text-base font-bold text-[#3F3F46] mb-3 relative pb-2 inline-block">
-            USER POLICY
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#C97B63]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#3F3F46]/80 font-normal pt-1">
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Terms & Conditions</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Disclaimer</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Return Policy</a></li>
-            <li><a href="#" class="hover:text-[#C97B63] transition-colors">Shipping Policy</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 5: Newsletter & Payment Badges -->
-        <div class="space-y-4">
+          <!-- Column 2: Shop -->
           <div>
-            <h3 class="text-base font-bold text-[#3F3F46] mb-3 relative pb-2 inline-block">
-              Join Our Newsletter
-              <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#C97B63]"></span>
+            <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
+              Shop
+              <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
             </h3>
-            <p class="text-xs text-[#3F3F46]/80 mb-3">Sign up for our e-mail to get latest news.</p>
-            
-            <form onsubmit="event.preventDefault(); alert('Subscribed to MAAYA Newsletter!');" class="flex items-center bg-white rounded-full p-1 border border-gray-300 shadow-sm max-w-full">
-              <input type="email" placeholder="Your email address" required class="w-full px-4 py-2 text-xs bg-transparent outline-none text-[#3F3F46]" />
-              <button type="submit" class="bg-[#3F3F46] hover:bg-[#C97B63] text-white text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shrink-0">Subscribe</button>
-            </form>
+            <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
+              <li><a href="shop.html?cat=wedding" class="hover:text-[#7A1F3D] transition-colors">Festive</a></li>
+              <li><a href="shop.html?cat=wedding" class="hover:text-[#7A1F3D] transition-colors">Wedding</a></li>
+              <li><a href="shop.html?cat=party" class="hover:text-[#7A1F3D] transition-colors">Party</a></li>
+              <li><a href="shop.html?live=true" class="hover:text-[#7A1F3D] transition-colors">Video Call Shopping</a>
+              </li>
+            </ul>
           </div>
 
-          <div class="pt-2">
-            <h4 class="text-xs font-bold text-[#3F3F46] uppercase tracking-wider mb-1">Stay Connected With MAAYA</h4>
-            <p class="text-[11px] text-[#3F3F46]/80 mb-3">Get Latest Updates From Us</p>
-            
-            <div class="border-t border-gray-300/60 pt-3">
-              <h4 class="text-xs font-bold text-[#3F3F46] mb-2 relative pb-1 inline-block">
-                We Accept
-                <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-[#C97B63]"></span>
-              </h4>
-              <div class="flex items-center gap-2 pt-1">
-                <!-- VISA Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-blue-900 shadow-sm flex items-center gap-1">
-                  <span class="italic font-extrabold text-blue-800">VISA</span>
-                </div>
-                <!-- MasterCard Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-gray-800 shadow-sm flex items-center gap-1">
-                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600"></span>
-                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 -ml-2"></span>
-                </div>
-                <!-- UPI Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-emerald-700 shadow-sm">
-                  <span>UPI ⚡</span>
+          <!-- Column 3: GET TO KNOW US -->
+          <div>
+            <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
+              GET TO KNOW US
+              <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
+            </h3>
+            <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
+              <li><a href="#" class="text-[#7A1F3D] font-medium hover:underline">FAQ</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Blog</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Awards</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Media</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Stores</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Virtual Tour</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: USER POLICY -->
+          <div>
+            <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
+              USER POLICY
+              <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
+            </h3>
+            <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Terms & Conditions</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Disclaimer</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Return Policy</a></li>
+              <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Shipping Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 5: Newsletter & Payment Badges -->
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
+                Join Our Newsletter
+                <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
+              </h3>
+              <p class="text-xs text-[#2F2A28]/80 mb-3">Sign up for our e-mail to get latest news.</p>
+
+              <form onsubmit="event.preventDefault(); alert('Subscribed to MAAYA Newsletter!');"
+                class="flex items-center bg-white rounded-full p-1 border border-gray-300 shadow-sm max-w-full">
+                <input type="email" placeholder="Your email address" required
+                  class="w-full px-4 py-2 text-xs bg-transparent outline-none text-[#2F2A28]" />
+                <button type="submit"
+                  class="bg-[#2F2A28] hover:bg-[#7A1F3D] text-white text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shrink-0">Subscribe</button>
+              </form>
+            </div>
+
+            <div class="pt-2">
+              <h4 class="text-xs font-bold text-[#2F2A28] uppercase tracking-wider mb-1">Stay Connected With MAAYA</h4>
+              <p class="text-[11px] text-[#2F2A28]/80 mb-3">Get Latest Updates From Us</p>
+
+              <div class="border-t border-gray-300/60 pt-3">
+                <h4 class="text-xs font-bold text-[#2F2A28] mb-2 relative pb-1 inline-block">
+                  We Accept
+                  <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-[#7A1F3D]"></span>
+                </h4>
+                <div class="flex items-center gap-2 pt-1">
+                  <!-- VISA Badge -->
+                  <div
+                    class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-blue-900 shadow-sm flex items-center gap-1">
+                    <span class="italic font-extrabold text-blue-800">VISA</span>
+                  </div>
+                  <!-- MasterCard Badge -->
+                  <div
+                    class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-gray-800 shadow-sm flex items-center gap-1">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 -ml-2"></span>
+                  </div>
+                  <!-- UPI Badge -->
+                  <div
+                    class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-emerald-700 shadow-sm">
+                    <span>UPI ⚡</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+        </div>
+
+        <!-- Bottom Bar with Scroll-to-Top Button -->
+        <div
+          class="border-t border-gray-300/70 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#2F2A28]/80">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-[#7A1F3D] font-serif">MAAYA</span>
+            <span>© Copyright 2026 MAAYA. All Rights Reserved</span>
+          </div>
+
+          <!-- Scroll To Top Button -->
+          <button onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Scroll to top"
+            class="w-9 h-9 rounded-full bg-white border border-gray-300 shadow-md text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 15l-6-6-6 6" />
+            </svg>
+          </button>
         </div>
 
       </div>
+    </footer>
+  </div>
+  <!-- FLOATING MOBILE CTA -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 lg:hidden w-[calc(100%-2rem)] max-w-sm">
+    <a href="shop.html?filter=today"
+      class="flex items-center justify-center gap-2 w-full py-3.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] text-white bg-[#7A1F3D] hover:bg-[#8C2847] shadow-lg active:scale-95 transition-all">
+      <span>🛍</span> Shop Today's Collection
+    </a>
+  </div>
 
-      <!-- Bottom Bar with Scroll-to-Top Button -->
-      <div class="border-t border-gray-300/70 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#3F3F46]/80">
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-[#C97B63] font-serif">MAAYA</span>
-          <span>© Copyright 2026 MAAYA. All Rights Reserved</span>
-        </div>
+  <div id="toast-root"></div>
 
-        <!-- Scroll To Top Button -->
-        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Scroll to top" class="w-9 h-9 rounded-full bg-white border border-gray-300 shadow-md text-gray-700 flex items-center justify-center hover:bg-[#C97B63] hover:text-white hover:border-[#C97B63] transition duration-300">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
-        </button>
-      </div>
-
-    </div>
-  </footer>
-</div>
-<div id="toast-root"></div>
-
-<script type="module" src="js/home.js"></script>
+  <script type="module" src="js/home.js"></script>
 </body>
+
 </html>

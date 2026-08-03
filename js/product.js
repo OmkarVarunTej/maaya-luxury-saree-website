@@ -55,10 +55,7 @@ function render(){
       <div>
         <div class="eyebrow mb-3">${product.fabric} · ${product.category}</div>
         <h1 class="font-heading text-3xl md:text-4xl leading-tight mb-3">${product.name}</h1>
-        <div class="flex items-center gap-3 mb-5">
-          <span class="stars">${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5-Math.round(product.rating))}</span>
-          <span class="text-sm opacity-60">${product.rating} · ${product.reviews} reviews</span>
-        </div>
+
         <div class="flex items-baseline gap-3 mb-6">
           <span class="font-sans text-2xl md:text-3xl font-bold text-black">${formatINR(product.price)}</span>
           ${product.oldPrice ? `<span class="opacity-80 line-through text-lg">${formatINR(product.oldPrice)}</span><span class="text-sm text-[var(--maroon)] font-medium">${product.discount}% OFF</span>` : ''}
@@ -141,7 +138,7 @@ function render(){
     <div class="border-b border-[var(--line)] flex gap-8 mb-8 overflow-x-auto">
       <button data-tab="desc" class="tab-btn active pb-4 border-b-2 border-transparent text-sm whitespace-nowrap">Description</button>
       <button data-tab="specs" class="tab-btn pb-4 border-b-2 border-transparent text-sm whitespace-nowrap">Specifications</button>
-      <button data-tab="reviews" class="tab-btn pb-4 border-b-2 border-transparent text-sm whitespace-nowrap">Reviews (${product.reviews})</button>
+
     </div>
     <div id="tab-content" class="pb-20 max-w-3xl"></div>
   </div>

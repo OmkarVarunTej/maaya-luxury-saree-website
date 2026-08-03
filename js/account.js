@@ -27,7 +27,7 @@ const MOCK_ORDERS = [
 
 const STATUS_STYLE = {
   'Delivered':'text-green-800 bg-green-800/10',
-  'In Transit':'text-[#C97B63] bg-[#C97B63]/10',
+  'In Transit':'text-[#7A1F3D] bg-[#7A1F3D]/10',
   'Cancelled':'text-red-700 bg-red-700/10'
 };
 
@@ -49,7 +49,7 @@ function renderContent(){
       <div class="grid sm:grid-cols-3 gap-5 mb-10">
         ${[['Total Orders', MOCK_ORDERS.length],['Wishlist Items', Wishlist.count()],['Loyalty Points','1,240']].map(([l,v])=>`
           <div class="bg-[var(--ivory)] p-6 rounded-sm">
-            <div class="text-3xl font-display mb-1">${v}</div>
+            <div class="text-3xl font-sans font-bold text-black mb-1">${v}</div>
             <div class="text-xs uppercase tracking-widest opacity-50">${l}</div>
           </div>`).join('')}
       </div>
@@ -80,7 +80,7 @@ function renderContent(){
       <div class="grid sm:grid-cols-2 gap-5 mb-6">
         ${addresses.map(a=>`
           <div class="border border-[var(--line)] rounded-sm p-5 relative">
-            ${a.primary ? `<span class="absolute top-4 right-4 text-[0.65rem] uppercase tracking-widest bg-[#C97B63]/10 text-[#C97B63] px-2 py-1 rounded-full">Default</span>` : ''}
+            ${a.primary ? `<span class="absolute top-4 right-4 text-[0.65rem] uppercase tracking-widest bg-[#7A1F3D]/10 text-[#7A1F3D] px-2 py-1 rounded-full">Default</span>` : ''}
             <div class="text-xs uppercase tracking-widest opacity-50 mb-2">${a.label}</div>
             <div class="text-sm font-medium mb-1">${a.name}</div>
             <div class="text-sm opacity-70 mb-1">${a.line}</div>
@@ -104,7 +104,7 @@ function renderContent(){
           <div><label class="text-xs font-medium mb-1.5 block">Birthday</label><input type="date" class="input"/></div>
           <div><label class="text-xs font-medium mb-1.5 block">Anniversary</label><input type="date" class="input"/></div>
         </div>
-        <label class="flex items-center gap-2 text-sm pt-1"><input type="checkbox" checked class="accent-[#C97B63]"/> Send me styling edits & early access emails</label>
+        <label class="flex items-center gap-2 text-sm pt-1"><input type="checkbox" checked class="accent-[#7A1F3D]"/> Send me styling edits & early access emails</label>
         <button class="btn btn-primary btn-ripple">Save Changes</button>
       </form>`;
     document.getElementById('settings-form').addEventListener('submit', e=>{ e.preventDefault(); toast('Profile updated successfully'); });
@@ -122,7 +122,7 @@ function orderRow(o){
       <div class="text-xs opacity-50">${o.date} · ${o.items.length} item${o.items.length>1?'s':''}</div>
     </div>
     <span class="text-xs px-3 py-1.5 rounded-full ${STATUS_STYLE[o.status]} w-fit">${o.status}</span>
-    <div class="font-display text-lg sm:text-right sm:w-28">${formatINR(o.total)}</div>
+    <div class="font-sans text-lg font-bold text-black sm:text-right sm:w-28">${formatINR(o.total)}</div>
     <button class="btn btn-outline text-xs px-4 py-2.5">View Details</button>
   </div>`;
 }
