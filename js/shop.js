@@ -7,12 +7,43 @@ renderNavbar('shop');
 renderFooter();
 
 const params = new URLSearchParams(location.search);
+const searchVal = params.get('search');
+let initCat = params.get('cat') || 'all';
+let initOcc = params.get('occasion') || 'all';
+let initFabric = params.get('fabric') || 'all';
+let initSearch = searchVal || null;
+
+if (searchVal) {
+  const q = searchVal.trim().toLowerCase();
+  
+  // Try mapping search query to category
+  const matchedCat = CATEGORIES.find(c => c.id.toLowerCase() === q || c.name.toLowerCase().includes(q));
+  if (matchedCat) {
+    initCat = matchedCat.id;
+    initSearch = null;
+  } else {
+    // Try mapping search query to fabric
+    const matchedFabric = FABRICS.find(f => f.toLowerCase() === q || f.toLowerCase().includes(q));
+    if (matchedFabric) {
+      initFabric = matchedFabric;
+      initSearch = null;
+    } else {
+      // Try mapping search query to occasion
+      const matchedOcc = OCCASIONS.find(o => o.id.toLowerCase() === q || o.name.toLowerCase().includes(q));
+      if (matchedOcc) {
+        initOcc = matchedOcc.id;
+        initSearch = null;
+      }
+    }
+  }
+}
+
 const state = {
-  cat: params.get('cat') || 'all',
-  occasion: params.get('occasion') || 'all',
-  fabric: params.get('fabric') || 'all',
-  search: params.get('search') || null,
-  filter: params.get('filter') || null, // 'new'
+  cat: initCat,
+  occasion: initOcc,
+  fabric: initFabric,
+  search: initSearch,
+  filter: params.get('filter') || null,
   minPrice: 0, maxPrice: 100000,
   colors: [], minRating: 0,
   sort: 'featured',
