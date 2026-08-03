@@ -109,7 +109,7 @@ function renderBody(){
             <div class="text-sm font-bold text-[#3F3F46] flex-1">${m.name}</div>
           </label>`).join('')}
       </div>
-      <div id="payment-fields"></div>
+      <div id="payment-fields" class="mt-2"></div>
       <div class="flex gap-3 mt-6">
         <button id="back-btn" class="btn btn-outline flex-1">Back</button>
         <button id="place-order-btn" class="btn btn-primary btn-ripple flex-1">Place Order · ${formatINR(total)}</button>
@@ -158,7 +158,30 @@ function bindStep(){
     document.getElementById('next-btn').addEventListener('click', ()=>{ step = 3; renderStepper(); renderBody(); window.scrollTo({top:0,behavior:'smooth'}); });
   }
   if (step === 3){
-    document.querySelectorAll('input[name=payment]').forEach(r=>r.addEventListener('change', e=>{ order.payment = e.target.value; renderBody(); }));
+    const renderPaymentFields = () => {
+      const pf = document.getElementById('payment-fields');
+      if (!pf) return;
+      if (order.payment === 'card') {
+        pf.innerHTML = `<div class="space-y-3 p-4 bg-[#0d1c12]/40 rounded-md border border-[var(--line)] mt-2">
+          <div><label class="text-xs text-white/60 mb-1 block">Card Number</label><input type="text" maxlength="19" placeholder="4242 4242 4242 4242" class="w-full bg-[#0d1c12] border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm text-white outline-none focus:border-[#D4AF6A]"/></div>
+          <div class="grid grid-cols-2 gap-3">
+            <div><label class="text-xs text-white/60 mb-1 block">Expiry</label><input type="text" maxlength="5" placeholder="MM/YY" class="w-full bg-[#0d1c12] border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm text-white outline-none focus:border-[#D4AF6A]"/></div>
+            <div><label class="text-xs text-white/60 mb-1 block">CVV</label><input type="password" maxlength="3" placeholder="•••" class="w-full bg-[#0d1c12] border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm text-white outline-none focus:border-[#D4AF6A]"/></div>
+          </div>
+        </div>`;
+      } else if (order.payment === 'upi') {
+        pf.innerHTML = `<div class="p-4 bg-[#0d1c12]/40 rounded-md border border-[var(--line)] mt-2">
+          <label class="text-xs text-white/60 mb-1 block">UPI ID</label>
+          <input type="text" placeholder="name@upi" class="w-full bg-[#0d1c12] border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm text-white outline-none focus:border-[#D4AF6A]"/>
+        </div>`;
+      } else if (order.payment === 'cod') {
+        pf.innerHTML = `<div class="p-4 bg-[var(--gold)]/10 rounded-md border border-[var(--gold)]/30 mt-2 text-sm text-white/80">
+          ✓ Pay in cash when your order is delivered. No advance payment required.
+        </div>`;
+      }
+    };
+    renderPaymentFields();
+    document.querySelectorAll('input[name=payment]').forEach(r=>r.addEventListener('change', e=>{ order.payment = e.target.value; renderPaymentFields(); }));
     document.getElementById('place-order-btn').addEventListener('click', ()=>{
       Cart.clear();
       step = 4; renderStepper(); renderBody();

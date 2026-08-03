@@ -1,10 +1,11 @@
 import { getProductBySlug, getRelated, formatINR, PRODUCTS } from './config.js';
-import { Cart, Wishlist, toast, initNavbarScroll, initReveal, initMobileMenu, initSearch } from './store.js';
+import { Cart, Wishlist, toast, initNavbarScroll, initReveal, initMobileMenu, initSearch, updateBadges } from './store.js';
 import { renderNavbar, renderFooter } from './layout.js';
 import { productCardHTML, bindProductCardEvents, initQuickView } from './product-card.js';
 
 renderNavbar('shop');
 renderFooter();
+updateBadges();
 
 const params = new URLSearchParams(location.search);
 const slug = params.get('slug');
@@ -119,7 +120,7 @@ function render(){
         <div class="bg-[var(--ivory)] p-5 rounded-sm mb-8">
           <div class="text-sm font-medium mb-3">Check Delivery Availability</div>
           <div class="flex gap-2">
-            <input id="pincode-input" type="text" maxlength="6" inputmode="numeric" placeholder="Enter pincode" class="flex-1 bg-white border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm outline-none focus:border-[var(--gold)]"/>
+            <input id="pincode-input" type="text" maxlength="6" inputmode="numeric" placeholder="Enter pincode" class="flex-1 bg-white text-black border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm outline-none focus:border-[var(--gold)]"/>
             <button id="pincode-check" class="btn btn-outline text-xs px-5">Check</button>
           </div>
           <div id="pincode-result" class="text-sm mt-3"></div>
