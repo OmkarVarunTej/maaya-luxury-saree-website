@@ -1,10 +1,11 @@
 import { PRODUCTS, CATEGORIES, OCCASIONS, FABRICS, formatINR } from './config.js';
-import { initNavbarScroll, initReveal, initMobileMenu, initSearch, Cart, Wishlist, toast } from './store.js';
+import { initNavbarScroll, initReveal, initMobileMenu, initSearch, Cart, Wishlist, toast, updateBadges } from './store.js';
 import { renderNavbar, renderFooter } from './layout.js';
 import { productCardHTML, bindProductCardEvents, initQuickView } from './product-card.js';
 
 renderNavbar('shop');
 renderFooter();
+updateBadges();
 
 const params = new URLSearchParams(location.search);
 const state = {
@@ -13,7 +14,7 @@ const state = {
   fabric: params.get('fabric') || 'all',
   search: params.get('search') || null,
   filter: params.get('filter') || null, // 'new'
-  minPrice: 0, maxPrice: 100000,
+  minPrice: 0, maxPrice: 55000,
   colors: [], minRating: 0,
   sort: 'featured',
   view: 'grid',
@@ -55,8 +56,8 @@ function filtersHTML(){
     </div>
     <div class="mb-8">
       <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#FCE185] font-bold mb-4">Price Range</div>
-      <input type="range" id="price-range" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#E5C158]"/>
-      <div class="flex justify-between text-xs text-[#D4AF6A]"><span>₹0</span><span id="price-val" class="font-bold text-[#FCE185]">${formatINR(state.maxPrice)}</span></div>
+      <input type="range" class="price-range-slider" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#E5C158]"/>
+      <div class="flex justify-between text-xs text-[#D4AF6A]"><span>₹0</span><span class="price-val-label font-bold text-[#FCE185]">${formatINR(state.maxPrice)}</span></div>
     </div>
     <div class="mb-8">
       <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#FCE185] font-bold mb-4">Fabric</div>
@@ -100,7 +101,7 @@ function filtersHTML(){
       </div>
     </div>
     <div class="mb-4">
-      <button id="clear-filters" class="w-full btn border border-[#D4AF6A]/40 text-[#FCE185] hover:bg-[#D4AF6A] hover:text-[#09150d] text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
+      <button class="clear-filters-btn w-full btn border border-[#D4AF6A]/40 text-[#FCE185] hover:bg-[#D4AF6A] hover:text-[#09150d] text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
     </div>
   `;
 }
@@ -112,7 +113,7 @@ function renderFilters(){
 }
 
 function bindFilterEvents(){
-  document.querySelectorAll('input[name=cat]').forEach(el=>el.addEventListener('change', e=>{ state.cat = e.target.value; state.filter=null; state.page=1; sync(); }));
+  document.querySelectorAll('input[name=cat]').forEach(el=>el.addEventListener('change', e=>{ state.cat = e.target.value; state.filter=null; state.search=null; state.page=1; sync(); }));
   document.querySelectorAll('input[name=fabric]').forEach(el=>el.addEventListener('change', e=>{ state.fabric = e.target.value; state.page=1; sync(); }));
   document.querySelectorAll('input[name=occasion]').forEach(el=>el.addEventListener('change', e=>{ state.occasion = e.target.value; state.page=1; sync(); }));
   document.querySelectorAll('input[name=rating]').forEach(el=>el.addEventListener('change', e=>{ state.minRating = Number(e.target.value); state.page=1; sync(); }));
@@ -121,15 +122,15 @@ function bindFilterEvents(){
     state.colors = state.colors.includes(c) ? state.colors.filter(x=>x!==c) : [...state.colors, c];
     state.page = 1; sync();
   }));
-  document.querySelectorAll('#price-range').forEach(el=>{
+  document.querySelectorAll('.price-range-slider').forEach(el=>{
     el.addEventListener('input', e=>{
       state.maxPrice = Number(e.target.value);
-      document.querySelectorAll('#price-val').forEach(v=>v.textContent = formatINR(state.maxPrice));
+      document.querySelectorAll('.price-val-label').forEach(v=>v.textContent = formatINR(state.maxPrice));
     });
     el.addEventListener('change', ()=>{ state.page=1; sync(); });
   });
-  document.querySelectorAll('#clear-filters, #clear-filters-empty').forEach(el=>el && el.addEventListener('click', ()=>{
-    Object.assign(state, { cat:'all', occasion:'all', fabric:'all', filter:null, maxPrice:55000, colors:[], minRating:0, page:1 });
+  document.querySelectorAll('.clear-filters-btn, #clear-filters-empty').forEach(el=>el && el.addEventListener('click', ()=>{
+    Object.assign(state, { cat:'all', occasion:'all', fabric:'all', filter:null, search:null, maxPrice:55000, colors:[], minRating:0, page:1 });
     sync();
   }));
 }

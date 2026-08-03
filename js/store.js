@@ -49,7 +49,7 @@ export const Wishlist = {
   products(){ return PRODUCTS.filter(p=>this.items.includes(p.id)); }
 };
 
-function updateBadges(){
+export function updateBadges(){
   document.querySelectorAll('[data-cart-count]').forEach(el=>{
     const n = Cart.count();
     el.textContent = n;
@@ -138,7 +138,7 @@ export function initSearch(){
     const q = input.value.trim().toLowerCase();
     if (!results) return;
     if (q.length < 2){ results.innerHTML=''; return; }
-    const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.includes(q) || p.fabric.toLowerCase().includes(q)).slice(0,6);
+    const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.includes(q) || p.fabric.toLowerCase().includes(q) || (p.category+' '+p.fabric).toLowerCase().includes(q) || ['wedding sarees','silk sarees','banarasi','cotton sarees','party wear','designer collection'].some(n=>n.includes(q)&&p.category===n.split(' ')[0].toLowerCase())).slice(0,6);
     results.innerHTML = matches.length ? matches.map(p=>`
       <a href="product.html?slug=${p.slug}" class="flex items-center gap-4 p-3 hover:bg-black/5 rounded transition">
         <img src="${p.img1}" class="w-14 h-16 object-cover rounded" alt="${p.name}"/>

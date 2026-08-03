@@ -1,20 +1,19 @@
 import { CATEGORIES, OCCASIONS, FABRICS, PRODUCTS, TESTIMONIALS, INSTAGRAM } from './config.js';
-import { initNavbarScroll, initReveal, initMobileMenu, initSearch, toast, Cart } from './store.js';
+import { initNavbarScroll, initReveal, initMobileMenu, initSearch, toast, Cart, updateBadges } from './store.js';
 import { renderNavbar, renderFooter } from './layout.js';
 import { productCardHTML, bindProductCardEvents, initQuickView } from './product-card.js';
 
 renderNavbar('home');
 renderFooter();
+updateBadges();
 
 /* ---------------- Hero entrance ---------------- */
-window.addEventListener('DOMContentLoaded', ()=>{
-  if (window.gsap){
-    gsap.timeline({ defaults:{ ease:'power3.out' } })
-      .fromTo('#hero-left', { opacity:0, x:-40 }, { opacity:1, x:0, duration:1.1 }, 0.1)
-      .fromTo('#hero-center', { opacity:0, y:50, scale:0.95 }, { opacity:1, y:0, scale:1, duration:1.3 }, 0.25)
-      .fromTo('#hero-right', { opacity:0, x:40 }, { opacity:1, x:0, duration:1.1 }, 0.4);
-  }
-});
+if (window.gsap){
+  gsap.timeline({ defaults:{ ease:'power3.out' } })
+    .fromTo('#hero-left', { opacity:0, x:-40 }, { opacity:1, x:0, duration:1.1 }, 0.1)
+    .fromTo('#hero-center', { opacity:0, y:50, scale:0.95 }, { opacity:1, y:0, scale:1, duration:1.3 }, 0.25)
+    .fromTo('#hero-right', { opacity:0, x:40 }, { opacity:1, x:0, duration:1.1 }, 0.4);
+}
 
 /* ---------------- Collections ---------------- */
 document.getElementById('collections-grid').innerHTML = CATEGORIES.map((c,i)=>`

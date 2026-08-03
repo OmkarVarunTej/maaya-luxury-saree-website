@@ -1,10 +1,11 @@
 import { formatINR, PRODUCTS } from './config.js';
-import { Cart, toast, initNavbarScroll, initMobileMenu, initSearch, initReveal } from './store.js';
+import { Cart, toast, initNavbarScroll, initMobileMenu, initSearch, initReveal, updateBadges } from './store.js';
 import { renderNavbar, renderFooter } from './layout.js';
 import { productCardHTML, bindProductCardEvents, initQuickView } from './product-card.js';
 
 renderNavbar('cart');
 renderFooter();
+updateBadges();
 
 const VALID_COUPONS = { WELCOME10: 0.10, MAAYA15: 0.15, FESTIVE20: 0.20 };
 let couponCode = null;
@@ -44,7 +45,7 @@ function render(){
         <h3 class="font-heading text-xl mb-6">Order Summary</h3>
         <div class="mb-5">
           <div class="flex gap-2">
-            <input id="coupon-input" type="text" placeholder="Enter coupon code" class="flex-1 bg-white border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm outline-none focus:border-[var(--gold)]" value="${couponCode||''}"/>
+            <input id="coupon-input" type="text" placeholder="Enter coupon code" class="flex-1 bg-white border border-[var(--line)] rounded-sm px-4 py-2.5 text-sm text-[#1c2820] outline-none focus:border-[var(--gold)]" value="${couponCode||''}"/>
             <button id="apply-coupon" class="btn btn-outline text-xs px-4">Apply</button>
           </div>
           <div id="coupon-msg" class="text-xs mt-2 ${couponCode?'text-green-800':'opacity-50'}">${couponCode ? `Code ${couponCode} applied — ${Math.round(VALID_COUPONS[couponCode]*100)}% off` : 'Try WELCOME10, MAAYA15, or FESTIVE20'}</div>
@@ -57,7 +58,7 @@ function render(){
         </div>
         <div class="flex justify-between items-baseline border-t border-[var(--line)] mt-5 pt-5 mb-6">
           <span class="font-heading text-lg">Total</span>
-          <span class="font-display text-2xl">${formatINR(Math.round(total))}</span>
+          <span class="font-sans text-2xl">${formatINR(Math.round(total))}</span>
         </div>
         <a href="checkout.html" class="btn btn-primary btn-ripple w-full mb-3">Proceed to Checkout</a>
         <a href="shop.html" class="block text-center text-xs uppercase tracking-widest opacity-60 hover:opacity-100 mt-3">Continue Shopping</a>

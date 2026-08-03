@@ -1,10 +1,11 @@
 import { formatINR, PRODUCTS } from './config.js';
-import { Wishlist, Cart, toast, initNavbarScroll, initMobileMenu, initSearch, initReveal } from './store.js';
+import { Wishlist, Cart, toast, initNavbarScroll, initMobileMenu, initSearch, initReveal, updateBadges } from './store.js';
 import { renderNavbar, renderFooter } from './layout.js';
 import { productCardHTML, bindProductCardEvents, initQuickView } from './product-card.js';
 
 renderNavbar('account');
 renderFooter();
+updateBadges();
 
 const params = new URLSearchParams(location.search);
 let tab = params.get('tab') || 'dashboard';
