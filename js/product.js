@@ -29,10 +29,23 @@ function render(){
     <div class="grid lg:grid-cols-2 gap-10 xl:gap-16 pb-20">
       <!-- Gallery -->
       <div>
-        <div class="grid grid-cols-[80px_1fr] gap-4">
-          <div class="flex lg:flex-col gap-3 order-2 lg:order-1" id="thumbs"></div>
-          <div class="order-1 lg:order-2 zoom-wrap rounded-sm overflow-hidden bg-[var(--champagne)] aspect-[3/4]" id="main-image-wrap">
+        <!-- Desktop Gallery -->
+        <div class="hidden lg:grid grid-cols-[80px_1fr] gap-4">
+          <div class="flex lg:flex-col gap-3" id="thumbs"></div>
+          <div class="zoom-wrap rounded-sm overflow-hidden bg-[var(--champagne)] aspect-[3/4]" id="main-image-wrap">
             <img id="main-image" src="${product.gallery[0]}" alt="${product.name}" class="w-full h-full object-cover"/>
+          </div>
+        </div>
+        
+        <!-- Mobile Gallery (Myntra-style Carousel) -->
+        <div class="lg:hidden relative">
+          <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-none aspect-[3/4] rounded-sm bg-[var(--champagne)]" id="mobile-gallery-slider" style="-webkit-overflow-scrolling:touch; scroll-behavior:smooth;">
+            ${product.gallery.map((g, i)=>`
+              <img src="${g}" class="w-full h-full object-cover snap-center shrink-0" alt="View ${i+1}"/>
+            `).join('')}
+          </div>
+          <div class="absolute bottom-4 right-4 bg-black/60 text-white text-[10px] tracking-widest font-bold px-2.5 py-1 rounded-full" id="mobile-gallery-indicator">
+            1 / ${product.gallery.length}
           </div>
         </div>
       </div>
@@ -46,8 +59,8 @@ function render(){
           <span class="text-sm opacity-60">${product.rating} · ${product.reviews} reviews</span>
         </div>
         <div class="flex items-baseline gap-3 mb-6">
-          <span class="font-sans text-3xl font-bold text-[#FCE185]">${formatINR(product.price)}</span>
-          ${product.oldPrice ? `<span class="opacity-40 line-through text-lg">${formatINR(product.oldPrice)}</span><span class="text-sm text-[var(--maroon)] font-medium">${product.discount}% OFF</span>` : ''}
+          <span class="font-sans text-2xl md:text-3xl font-bold text-black">${formatINR(product.price)}</span>
+          ${product.oldPrice ? `<span class="opacity-80 line-through text-lg">${formatINR(product.oldPrice)}</span><span class="text-sm text-[var(--maroon)] font-medium">${product.discount}% OFF</span>` : ''}
         </div>
         <p class="text-sm opacity-60 mb-2">Inclusive of all taxes. Complimentary express shipping over ₹15,000.</p>
 
@@ -157,6 +170,17 @@ function bindGallery(){
     const y = ((e.clientY - r.top)/r.height)*100;
     img.style.transformOrigin = `${x}% ${y}%`;
   });
+
+  const slider = document.getElementById('mobile-gallery-slider');
+  if (slider) {
+    slider.addEventListener('scroll', () => {
+      const idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+      const indicator = document.getElementById('mobile-gallery-indicator');
+      if (indicator) {
+        indicator.textContent = `${idx + 1} / ${product.gallery.length}`;
+      }
+    });
+  }
 }
 
 function bindOptions(){

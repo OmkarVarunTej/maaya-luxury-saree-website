@@ -26,15 +26,15 @@ const MOCK_ORDERS = [
 
 const STATUS_STYLE = {
   'Delivered':'text-green-800 bg-green-800/10',
-  'In Transit':'text-[var(--gold-deep)] bg-[var(--gold)]/15',
-  'Cancelled':'text-[var(--maroon)] bg-[var(--maroon)]/10'
+  'In Transit':'text-[#C97B63] bg-[#C97B63]/10',
+  'Cancelled':'text-red-700 bg-red-700/10'
 };
 
 function renderNav(){
   document.getElementById('acc-nav').innerHTML = TABS.map(t=>`
-    <button data-tab="${t.id}" class="acc-link ${tab===t.id?'active':''} text-left text-sm px-4 py-3 rounded-sm border border-[var(--line)] md:border-0 whitespace-nowrap transition">${t.label}</button>
-  `).join('') + `<button id="logout-btn" class="text-left text-sm px-4 py-3 rounded-sm text-[var(--maroon)] whitespace-nowrap">Sign Out</button>`;
-  document.querySelectorAll('.acc-link').forEach(b=>b.addEventListener('click', ()=>{
+    <button data-tab="${t.id}" class="acc-link ${tab===t.id?'active':''} whitespace-nowrap transition">${t.label}</button>
+  `).join('') + `<button id="logout-btn" class="acc-link text-red-600 bg-red-50/60 hover:bg-red-50 whitespace-nowrap">Sign Out</button>`;
+  document.querySelectorAll('.acc-link[data-tab]').forEach(b=>b.addEventListener('click', ()=>{
     tab = b.dataset.tab; history.replaceState(null,'',`account.html?tab=${tab}`); renderAll();
   }));
   document.getElementById('logout-btn').addEventListener('click', ()=>toast('Signed out', 'See you again soon.'));
@@ -79,7 +79,7 @@ function renderContent(){
       <div class="grid sm:grid-cols-2 gap-5 mb-6">
         ${addresses.map(a=>`
           <div class="border border-[var(--line)] rounded-sm p-5 relative">
-            ${a.primary ? `<span class="absolute top-4 right-4 text-[0.65rem] uppercase tracking-widest bg-[var(--gold)]/15 text-[var(--gold-deep)] px-2 py-1 rounded-full">Default</span>` : ''}
+            ${a.primary ? `<span class="absolute top-4 right-4 text-[0.65rem] uppercase tracking-widest bg-[#C97B63]/10 text-[#C97B63] px-2 py-1 rounded-full">Default</span>` : ''}
             <div class="text-xs uppercase tracking-widest opacity-50 mb-2">${a.label}</div>
             <div class="text-sm font-medium mb-1">${a.name}</div>
             <div class="text-sm opacity-70 mb-1">${a.line}</div>
@@ -103,7 +103,7 @@ function renderContent(){
           <div><label class="text-xs font-medium mb-1.5 block">Birthday</label><input type="date" class="input"/></div>
           <div><label class="text-xs font-medium mb-1.5 block">Anniversary</label><input type="date" class="input"/></div>
         </div>
-        <label class="flex items-center gap-2 text-sm pt-1"><input type="checkbox" checked class="accent-[var(--gold)]"/> Send me styling edits & early access emails</label>
+        <label class="flex items-center gap-2 text-sm pt-1"><input type="checkbox" checked class="accent-[#C97B63]"/> Send me styling edits & early access emails</label>
         <button class="btn btn-primary btn-ripple">Save Changes</button>
       </form>`;
     document.getElementById('settings-form').addEventListener('submit', e=>{ e.preventDefault(); toast('Profile updated successfully'); });
