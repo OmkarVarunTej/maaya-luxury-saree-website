@@ -57,7 +57,7 @@ function render(){
         </div>
         <div class="flex justify-between items-baseline border-t border-[var(--line)] mt-5 pt-5 mb-6">
           <span class="font-heading text-lg">Total</span>
-          <span class="font-display text-2xl">${formatINR(Math.round(total))}</span>
+          <span class="font-sans text-2xl font-bold text-black">${formatINR(Math.round(total))}</span>
         </div>
         <a href="checkout.html" class="btn btn-primary btn-ripple w-full mb-3">Proceed to Checkout</a>
         <a href="shop.html" class="block text-center text-xs uppercase tracking-widest opacity-60 hover:opacity-100 mt-3">Continue Shopping</a>
@@ -77,7 +77,7 @@ function render(){
       <div class="flex-1 min-w-0">
         <a href="product.html?slug=${l.product.slug}" class="font-heading text-base md:text-lg hover:text-[var(--gold-deep)] line-clamp-1">${l.product.name}</a>
         <div class="text-xs opacity-50 mt-1">Colour: ${l.color} &nbsp;·&nbsp; Blouse: ${l.size}</div>
-        <div class="font-sans text-lg font-bold mt-2 text-[#FCE185]">${formatINR(l.product.price)}</div>
+        <div class="font-sans text-lg font-bold mt-2 text-black">${formatINR(l.product.price)}</div>
         <div class="flex items-center justify-between mt-3">
           <div class="inline-flex items-center border border-[var(--line)] rounded-sm">
             <button data-qty-minus class="w-8 h-8 text-sm hover:bg-black/5">−</button>
