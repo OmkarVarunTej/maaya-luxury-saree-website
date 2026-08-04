@@ -4,24 +4,22 @@ import { Wishlist } from './store.js';
 export function productCardHTML(p, i=0){
   const wished = Wishlist.has(p.id);
   
-  let badges = '';
-  let topOffset = 14;
+  let badgeItems = [];
   if (p.isNewToday) {
-    badges += `<span class="pc-badge pc-badge-primary" style="background:#7A1F3D; color:#FFFFFF; font-weight:700; top:${topOffset}px">JUST ARRIVED</span>`;
-    topOffset += 28;
+    badgeItems.push(`<span class="pc-badge-glass">JUST ARRIVED</span>`);
   } else if (p.isNew) {
-    badges += `<span class="pc-badge pc-badge-primary" style="background:#7A1F3D; color:#FFFFFF; top:${topOffset}px">NEW TODAY</span>`;
-    topOffset += 28;
+    badgeItems.push(`<span class="pc-badge-glass">NEW TODAY</span>`);
   } else if (p.discount) {
-    badges += `<span class="pc-badge pc-badge-primary" style="top:${topOffset}px">-${p.discount}%</span>`;
-    topOffset += 28;
+    badgeItems.push(`<span class="pc-badge-glass">-${p.discount}% OFF</span>`);
   }
   
   if (p.stock > 0 && p.stock <= 5) {
-    badges += `<span class="pc-badge pc-badge-stock" style="background:#7A1F3D; color:#FFFFFF; top:${topOffset}px">Only ${p.stock} Left</span>`;
+    badgeItems.push(`<span class="pc-badge-glass">ONLY ${p.stock} LEFT</span>`);
   } else if (p.stock === 0) {
-    badges += `<span class="pc-badge pc-badge-stock" style="background:#2F2A28; color:#FFFFFF; top:${topOffset}px">SOLD OUT</span>`;
+    badgeItems.push(`<span class="pc-badge-glass-soldout">SOLD OUT</span>`);
   }
+
+  const badges = badgeItems.length ? `<div class="absolute top-3 left-3 sm:top-3.5 sm:left-3.5 flex flex-col items-start gap-1.5 z-10 pointer-events-none">${badgeItems.join('')}</div>` : '';
 
   return `
   <div class="product-card reveal-scale" style="--i:${i%4}">
@@ -35,11 +33,11 @@ export function productCardHTML(p, i=0){
       <div class="pc-quickview" data-quickview="${p.slug}">Quick View</div>
     </a>
     <div class="pt-4 px-3.5">
-      <a href="product.html?slug=${p.slug}" class="block font-heading text-[0.98rem] leading-snug text-[#2F2A28] hover:text-[#7A1F3D] transition line-clamp-2">${p.name}</a>
+      <a href="product.html?slug=${p.slug}" class="block font-heading text-[0.98rem] leading-snug text-[#2E2625] hover:text-[#6D0016] transition line-clamp-2">${p.name}</a>
 
       <div class="flex items-baseline gap-2 mt-1.5">
-        <span class="font-sans text-lg text-black font-bold">${formatINR(p.price)}</span>
-        ${p.oldPrice ? `<span class="text-xs opacity-80 line-through">${formatINR(p.oldPrice)}</span>` : ''}
+        <span class="font-sans text-lg text-[#6D0016] font-bold">${formatINR(p.price)}</span>
+        ${p.oldPrice ? `<span class="text-xs text-[#8E827E] line-through">${formatINR(p.oldPrice)}</span>` : ''}
       </div>
     </div>
   </div>`;
@@ -78,21 +76,21 @@ export function initQuickView(PRODUCTS, Cart, toast){
     modal.className = 'fixed inset-0 z-[130] flex items-center justify-center p-4';
     modal.innerHTML = `
       <div class="absolute inset-0 bg-black/60" data-qv-close></div>
-      <div class="relative bg-[var(--cream)] max-w-3xl w-full rounded-sm overflow-hidden grid md:grid-cols-2 max-h-[90vh] overflow-y-auto">
+      <div class="relative bg-[#FAF5EF] max-w-3xl w-full rounded-md overflow-hidden grid md:grid-cols-2 max-h-[90vh] overflow-y-auto border border-[#D4AF37]">
         <div class="aspect-[3/4] md:aspect-auto"><img src="${p.img1}" class="w-full h-full object-cover" alt="${p.name}"/></div>
-        <div class="p-6 md:p-8 relative text-[#2F2A28]">
-          <button data-qv-close class="absolute top-4 right-4 p-1 text-[#2F2A28] hover:text-[#7A1F3D]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5"/></svg></button>
-          <div class="eyebrow mb-2">${p.category}</div>
-          <div class="font-heading text-2xl mb-2">${p.name}</div>
+        <div class="p-6 md:p-8 relative text-[#2E2625]">
+          <button data-qv-close class="absolute top-4 right-4 p-1 text-[#2E2625] hover:text-[#6D0016]"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <div class="eyebrow mb-2 text-[#D4AF37]">${p.category}</div>
+          <div class="font-heading text-2xl mb-2 text-[#6D0016]">${p.name}</div>
 
           <div class="flex items-baseline gap-2 mb-4">
-            <span class="font-sans text-2xl font-bold text-black">${formatINR(p.price)}</span>
-            ${p.oldPrice ? `<span class="text-sm opacity-80 line-through">${formatINR(p.oldPrice)}</span>` : ''}
+            <span class="font-sans text-2xl font-bold text-[#6D0016]">${formatINR(p.price)}</span>
+            ${p.oldPrice ? `<span class="text-sm opacity-80 line-through text-[#8E827E]">${formatINR(p.oldPrice)}</span>` : ''}
           </div>
-          <p class="text-sm opacity-70 leading-relaxed mb-6 line-clamp-2">${p.description}</p>
-          <div class="flex gap-3">
-            <button data-qv-add="${p.id}" class="btn btn-primary btn-ripple flex-1">Add to Cart</button>
-            <a href="product.html?slug=${p.slug}" class="btn btn-outline flex-1 text-center">View Full Details</a>
+          <p class="text-sm opacity-80 leading-relaxed mb-6 line-clamp-2 text-[#2E2625]">${p.description}</p>
+          <div class="flex gap-3 mt-4">
+            <button data-qv-add="${p.id}" class="btn btn-primary btn-ripple flex-1 !py-3.5 !px-5 text-xs">Add to Cart</button>
+            <a href="product.html?slug=${p.slug}" class="btn btn-outline flex-1 text-center !py-3.5 !px-5 text-xs">View Full Details</a>
           </div>
         </div>
       </div>`;

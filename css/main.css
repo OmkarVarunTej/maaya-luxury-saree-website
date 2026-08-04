@@ -6,42 +6,42 @@
    ============================================================ */
 
 :root {
-  --background: #FCFAF7;
+  --background: #FAF5EF;
   --surface: #FFFFFF;
-  --surface-alt: #F7F3EE;
-  --surface-soft: #F2ECE5;
-  --text-primary: #2F2A28;
-  --text-secondary: #6F6863;
-  --text-muted: #9B948E;
+  --surface-alt: #F3ECE2;
+  --surface-soft: #EFE6D8;
+  --text-primary: #2E2625;
+  --text-secondary: #5E5451;
+  --text-muted: #8E827E;
   --text-on-primary: #FFFFFF;
-  --primary: #7A1F3D;
-  --primary-hover: #8C2847;
-  --primary-light: #F6E8EC;
-  --secondary: #C9A14A;
-  --secondary-hover: #B8903E;
-  --secondary-light: #F7F0DE;
-  --border: #E7DED3;
-  --border-light: #F1EBE4;
+  --primary: #6D0016;
+  --primary-hover: #540011;
+  --primary-light: #F4E6E8;
+  --secondary: #D4AF37;
+  --secondary-hover: #B89428;
+  --secondary-light: #FAF5E8;
+  --border: #E5D5B5;
+  --border-light: #ECE0CE;
   --success: #3F7D58;
   --warning: #D48B2C;
   --error: #B43C3C;
-  --badge-new-bg: #C9A14A;
-  --badge-new-text: #2F2A28;
-  --badge-sale-bg: #7A1F3D;
-  --badge-sale-text: #FFFFFF;
-  --badge-stock-bg: #F6E8EC;
-  --badge-stock-text: #7A1F3D;
-  --button-primary: #7A1F3D;
-  --button-primary-hover: #8C2847;
-  --button-primary-text: #FFFFFF;
+  --badge-new-bg: #6D0016;
+  --badge-new-text: #D4AF37;
+  --badge-sale-bg: #6D0016;
+  --badge-sale-text: #D4AF37;
+  --badge-stock-bg: #6D0016;
+  --badge-stock-text: #D4AF37;
+  --button-primary: #6D0016;
+  --button-primary-hover: #540011;
+  --button-primary-text: #D4AF37;
   --button-secondary-bg: transparent;
-  --button-secondary-border: #C9A14A;
-  --button-secondary-text: #C9A14A;
-  --navbar-bg: rgba(252, 250, 247, 0.78);
-  --navbar-border: rgba(201, 161, 74, 0.18);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.10);
+  --button-secondary-border: #D4AF37;
+  --button-secondary-text: #D4AF37;
+  --navbar-bg: rgba(250, 245, 239, 0.85);
+  --navbar-border: rgba(212, 175, 55, 0.25);
+  --shadow-sm: 0 4px 12px rgba(109, 0, 22, 0.05);
+  --shadow-md: 0 10px 30px rgba(109, 0, 22, 0.08);
+  --shadow-lg: 0 20px 60px rgba(109, 0, 22, 0.12);
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -62,20 +62,6 @@
   --maroon-deep: var(--primary-hover);
   --white: #FFFFFF;
   --line: var(--border);
-  --line-soft: rgba(0, 0, 0, 0.06);
-
-  --font-display: 'Cormorant Garamond', 'Playfair Display', serif;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'DM Sans', 'Jost', 'Inter', sans-serif;
-
-  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 200ms;
-  --dur-med: 420ms;
-  --dur-slow: 800ms;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 html {
@@ -145,22 +131,22 @@ button {
   font-size: 0.72rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: var(--gold);
   font-weight: 500;
 }
 
 .section-title {
   font-family: var(--font-heading);
   font-weight: 600;
-  color: var(--brown-deep);
+  color: var(--primary);
   letter-spacing: 0.01em;
 }
 
-/* Light background section title fallback for high contrast */
+/* Light background section title fallback */
 .bg-light .section-title,
 .bg-ivory .section-title,
 .bg-[#f5f2eb] .section-title {
-  color: var(--gold);
+  color: var(--primary);
 }
 
 /* ---------- Texture / grain overlay ---------- */
@@ -184,94 +170,85 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 0.95rem 2.1rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  padding: 0.65rem 1.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 4px;
-  border: 1px solid transparent;
-  transition: all var(--dur-fast) var(--ease-luxury);
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
+  transition: all 300ms ease;
+  cursor: pointer;
 }
 
-/* Luxury Crimson Maroon Add to Cart / Primary Button */
 .btn-primary {
-  background: #7A1F3D;
-  color: #FFFFFF !important;
-  border: 1px solid #7A1F3D;
-  box-shadow: 0 4px 14px rgba(122, 31, 61, 0.2);
+  background-color: #6D0016 !important;
+  color: #D4AF37 !important;
+  border: 1px solid #6D0016 !important;
 }
 
 .btn-primary:hover {
-  background: #8C2847;
-  color: #FFFFFF !important;
-  border-color: #8C2847;
-  box-shadow: 0 6px 20px rgba(122, 31, 61, 0.3);
-  transform: translateY(-1px);
-  letter-spacing: 0.22em;
-}
-
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold) 60%, var(--gold-deep));
-  color: var(--white);
-}
-
-.btn-gold:hover {
-  filter: brightness(1.08);
-  letter-spacing: 0.22em;
+  background-color: #540011 !important;
+  color: #D4AF37 !important;
+  box-shadow: 0 10px 25px rgba(109, 0, 22, 0.35);
 }
 
 .btn-outline {
-  background: transparent;
-  border-color: var(--brown);
-  color: var(--brown);
+  background-color: transparent !important;
+  color: #D4AF37 !important;
+  border: 1px solid #D4AF37 !important;
 }
 
 .btn-outline:hover {
-  background: var(--brown);
-  color: var(--cream);
+  background-color: #D4AF37 !important;
+  color: #FFFFFF !important;
 }
 
 .btn-outline-light {
-  background: transparent;
-  border-color: #7A1F3D;
-  color: #7A1F3D;
+  background-color: transparent !important;
+  color: #D4AF37 !important;
+  border: 1px solid #D4AF37 !important;
 }
 
 .btn-outline-light:hover {
-  background: #7A1F3D;
-  color: #FFFFFF;
-  border-color: #7A1F3D;
+  background-color: #D4AF37 !important;
+  color: #6D0016 !important;
 }
 
-.btn-ripple::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
-  opacity: 0;
-  transform: scale(0.4);
-  transition: opacity var(--dur-med), transform var(--dur-med);
+/* ---------- Product Card Glass Badges ---------- */
+.pc-badge-glass {
+  background: rgba(109, 0, 22, 0.78) !important;
+  backdrop-filter: blur(10px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(140%) !important;
+  color: #D4AF37 !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
+  border-radius: 9999px !important;
+  padding: 0.32rem 0.7rem !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  line-height: 1.15 !important;
+  display: inline-block !important;
 }
 
-.btn-ripple:active::after {
-  opacity: 1;
-  transform: scale(1.4);
-  transition: 0s;
-}
-
-/* ---------- Card lift ---------- */
-.lift {
-  transition: transform var(--dur-med) var(--ease-luxury), box-shadow var(--dur-med) var(--ease-luxury);
-}
-
-.lift:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+.pc-badge-glass-soldout {
+  background: rgba(46, 38, 37, 0.82) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #D4AF37 !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18) !important;
+  border-radius: 9999px !important;
+  padding: 0.32rem 0.7rem !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  line-height: 1.15 !important;
+  display: inline-block !important;
 }
 
 /* ---------- Glass ---------- */
@@ -404,14 +381,14 @@ button {
 }
 
 .pc-wishlist:hover {
-  background: var(--maroon);
-  color: var(--white);
+  background: #6D0016;
+  color: #D4AF37;
   transform: scale(1.08);
 }
 
 .pc-wishlist.active {
-  background: var(--maroon);
-  color: #fff;
+  background: #6D0016;
+  color: #D4AF37;
 }
 
 .pc-quickview {
@@ -422,8 +399,8 @@ button {
   z-index: 3;
   transform: translateY(100%);
   transition: transform var(--dur-med) var(--ease-luxury);
-  background: rgba(36, 24, 18, 0.88);
-  color: var(--cream);
+  background: rgba(109, 0, 22, 0.92);
+  color: #D4AF37;
   text-align: center;
   padding: 0.85rem;
   font-size: 0.72rem;
@@ -448,15 +425,15 @@ button {
   z-index: 100;
   transition: all var(--dur-med) var(--ease-luxury);
   background: #FFFFFF;
-  color: #2F2A28;
+  color: #2E2625;
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(250, 245, 239, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border-bottom: 1px solid #E7DED3;
+  box-shadow: 0 10px 30px rgba(109, 0, 22, 0.06);
+  border-bottom: 1px solid #E5D5B5;
 }
 
 .nav-link {
@@ -465,12 +442,12 @@ button {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0.4rem 0;
-  color: #2F2A28 !important;
+  color: #2E2625 !important;
   font-weight: 700;
 }
 
 .nav-link:hover {
-  color: #7A1F3D !important;
+  color: #D4AF37 !important;
 }
 
 .nav-link::after {
@@ -480,7 +457,7 @@ button {
   right: 100%;
   bottom: -2px;
   height: 1px;
-  background: #7A1F3D;
+  background: #D4AF37;
   transition: right var(--dur-med) var(--ease-luxury);
 }
 
@@ -576,7 +553,7 @@ textarea:focus-visible {
   opacity: 0;
   transition: all 500ms var(--ease-luxury);
   border: 1px solid #E7DED3;
-  border-left: 4px solid #7A1F3D;
+  border-left: 4px solid #6D0016;
 }
 
 .toast.show {
@@ -679,7 +656,7 @@ input[type=range]::-webkit-slider-thumb {
   right: 12px;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
-  color: #7A1F3D;
+  color: #6D0016;
   border: 1px solid #E7DED3;
   padding: 8px 0;
   text-align: center;
@@ -749,33 +726,21 @@ input[type=range]::-webkit-slider-thumb {
   }
 
   #navbar-root + header {
-    padding-top: 8.5rem !important;
+    padding-top: 5.25rem !important;
   }
 
   #navbar-root + section {
-    padding-top: 8.5rem !important;
+    padding-top: 5.25rem !important;
   }
 
   #product-grid {
     gap: 0.75rem !important;
   }
 
-  .pc-badge {
-    left: 8px;
-    max-width: calc(100% - 48px);
-    padding: 0.28rem 0.38rem;
-    font-size: 0.48rem;
-    line-height: 1.15;
-    letter-spacing: 0.07em;
-    white-space: nowrap;
-  }
-
-  .pc-badge-primary {
-    top: 8px !important;
-  }
-
-  .pc-badge-stock {
-    top: 29px !important;
+  .pc-badge-glass, .pc-badge-glass-soldout {
+    padding: 0.22rem 0.48rem !important;
+    font-size: 0.48rem !important;
+    letter-spacing: 0.08em !important;
   }
 
   .pc-wishlist {
@@ -914,6 +879,25 @@ input[type=range]::-webkit-slider-thumb {
   background: rgba(255, 255, 255, 0.22) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
   box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.36) 0%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0.32) 100%
+  ) !important;
+  box-shadow:
+    0 16px 40px -6px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.04),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.04),
+    inset 0 0 20px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Crystal Glass Search Input Field */
+.crystal-glass-search {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
   backdrop-filter: blur(4px) !important;
   -webkit-backdrop-filter: blur(4px) !important;
   border-radius: 9999px !important;
@@ -923,8 +907,8 @@ input[type=range]::-webkit-slider-thumb {
 .crystal-glass-search:hover,
 .crystal-glass-search:focus-within {
   background: rgba(255, 255, 255, 0.35) !important;
-  border-color: rgba(122, 31, 61, 0.6) !important;
-  box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(122, 31, 61, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.7) !important;
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(109, 0, 22, 0.12) !important;
 }
 
 /* Navigation Link Animations */
@@ -935,7 +919,8 @@ input[type=range]::-webkit-slider-thumb {
 
 .glass-nav-link:hover {
   transform: translateY(-1.5px) !important;
-  text-shadow: 0 0 12px rgba(122, 31, 61, 0.25) !important;
+  color: #D4AF37 !important;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.4) !important;
 }
 
 .glass-nav-link::after {
@@ -945,9 +930,9 @@ input[type=range]::-webkit-slider-thumb {
   left: 50%;
   width: 0;
   height: 2px;
-  background: #7A1F3D;
+  background: #D4AF37;
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(122, 31, 61, 0.6);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   transform: translateX(-50%);
 }
@@ -963,7 +948,8 @@ input[type=range]::-webkit-slider-thumb {
 
 .glass-icon-btn:hover {
   transform: scale(1.06) translateY(-1px) !important;
-  filter: drop-shadow(0 4px 8px rgba(122, 31, 61, 0.25)) !important;
+  color: #D4AF37 !important;
+  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.35)) !important;
 }
 
 /* Glass status and category strip below the main navbar */

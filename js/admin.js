@@ -25,13 +25,13 @@ const stats = [
 document.getElementById('stat-cards').innerHTML = stats.map(s=>`
   <div class="admin-card p-6">
     <div class="flex items-center justify-between mb-4">
-      <div class="w-10 h-10 rounded-full bg-[#7A1F3D]/10 flex items-center justify-center">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="${s.icon}" stroke="#7A1F3D" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div class="w-10 h-10 rounded-full bg-[#6D0016]/10 flex items-center justify-center">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="${s.icon}" stroke="#6D0016" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
-      <span class="text-xs px-2 py-1 rounded-full ${s.up?'bg-green-800/10 text-green-800':'bg-red-700/10 text-red-700'}">${s.change}</span>
+      <span class="text-xs px-2 py-1 rounded-full font-bold ${s.up?'bg-emerald-800/10 text-emerald-800':'bg-red-700/10 text-red-700'}">${s.change}</span>
     </div>
-    <div class="text-2xl font-heading mb-1">${s.value}</div>
-    <div class="text-xs opacity-50">${s.label}</div>
+    <div class="text-2xl font-heading mb-1 text-[#6D0016]">${s.value}</div>
+    <div class="text-xs text-[#2E2625]/70 font-medium">${s.label}</div>
   </div>`).join('');
 
 /* Charts */
@@ -40,15 +40,15 @@ new Chart(document.getElementById('revenueChart'), {
   type:'line',
   data:{ labels:months, datasets:[{
     label:'Revenue', data:[520000,610000,580000,720000,690000,845000],
-    borderColor:'#7A1F3D', backgroundColor:'rgba(122, 31, 61,0.12)', fill:true, tension:0.4, pointRadius:3, pointBackgroundColor:'#7A1F3D'
+    borderColor:'#6D0016', backgroundColor:'rgba(109, 0, 22, 0.12)', fill:true, tension:0.4, pointRadius:4, pointBackgroundColor:'#6D0016'
   }]},
-  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ callback:v=>'₹'+(v/1000)+'k' }, grid:{ color:'#E7DED3' } }, x:{ grid:{ display:false } } } }
+  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ callback:v=>'₹'+(v/1000)+'k' }, grid:{ color:'#E5D5B5' } }, x:{ grid:{ display:false } } } }
 });
 new Chart(document.getElementById('categoryChart'), {
   type:'doughnut',
   data:{ labels: CATEGORIES.map(c=>c.name), datasets:[{
     data: CATEGORIES.map(c=>c.count),
-    backgroundColor:['#7A1F3D','#E5A490','#2F2A28','#71717A','#D4D4D8','#FCFAF7']
+    backgroundColor:['#6D0016','#D4AF37','#2E2625','#8E827E','#C5B69C','#F3ECE2']
   }]},
   options:{ plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{ size:10 } } } }, cutout:'62%' }
 });
@@ -61,18 +61,18 @@ const orders = [
   { id:'MYA482899', customer:'Ritu Kapoor', date:'23 Jul', total:8900, status:'Delivered' },
   { id:'MYA482887', customer:'Sneha Iyer', date:'22 Jul', total:21400, status:'Cancelled' }
 ];
-const OSTYLE = { Delivered:'text-green-800 bg-green-800/10', Processing:'text-[#7A1F3D] bg-[#7A1F3D]/10', Shipped:'text-blue-800 bg-blue-800/10', Cancelled:'text-red-700 bg-red-700/10' };
+const OSTYLE = { Delivered:'text-emerald-800 bg-emerald-800/10 font-bold', Processing:'text-[#6D0016] bg-[#6D0016]/10 font-bold', Shipped:'text-blue-800 bg-blue-800/10 font-bold', Cancelled:'text-red-700 bg-red-700/10 font-bold' };
 document.getElementById('orders-table').innerHTML = `
-  <thead><tr class="text-left text-xs opacity-50 border-b border-[var(--line-soft)]">
-    <th class="py-3 font-normal">Order</th><th class="py-3 font-normal">Customer</th><th class="py-3 font-normal">Date</th><th class="py-3 font-normal">Total</th><th class="py-3 font-normal">Status</th>
+  <thead><tr class="text-left text-xs text-[#2E2625]/60 border-b border-[#E5D5B5]">
+    <th class="py-3 font-semibold">Order</th><th class="py-3 font-semibold">Customer</th><th class="py-3 font-semibold">Date</th><th class="py-3 font-semibold">Total</th><th class="py-3 font-semibold">Status</th>
   </tr></thead>
   <tbody>
     ${orders.map(o=>`
-      <tr class="border-b border-[var(--line-soft)] last:border-0">
-        <td class="py-3 font-medium">#${o.id}</td>
-        <td class="py-3 opacity-70">${o.customer}</td>
-        <td class="py-3 opacity-70">${o.date}</td>
-        <td class="py-3">${formatINR(o.total)}</td>
+      <tr class="border-b border-[#E5D5B5] last:border-0">
+        <td class="py-3 font-medium text-[#6D0016]">#${o.id}</td>
+        <td class="py-3 text-[#2E2625]">${o.customer}</td>
+        <td class="py-3 text-[#2E2625]/70">${o.date}</td>
+        <td class="py-3 font-bold text-[#6D0016]">${formatINR(o.total)}</td>
         <td class="py-3"><span class="text-xs px-2.5 py-1 rounded-full ${OSTYLE[o.status]}">${o.status}</span></td>
       </tr>`).join('')}
   </tbody>`;
@@ -81,27 +81,27 @@ document.getElementById('orders-table').innerHTML = `
 const top = PRODUCTS.filter(p=>p.isBestseller).slice(0,4);
 document.getElementById('top-products').innerHTML = top.map(p=>`
   <div class="flex items-center gap-3">
-    <img src="${p.img1}" class="w-10 h-12 object-cover rounded-sm" alt="${p.name}"/>
+    <img src="${p.img1}" class="w-10 h-12 object-cover rounded-sm border border-[#E5D5B5]" alt="${p.name}"/>
     <div class="flex-1 min-w-0">
-      <div class="text-xs font-medium line-clamp-1">${p.name}</div>
-      <div class="text-[0.68rem] opacity-50">${p.reviews} sold</div>
+      <div class="text-xs font-medium line-clamp-1 text-[#2E2625]">${p.name}</div>
+      <div class="text-[0.68rem] text-[#2E2625]/60">${p.reviews} sold</div>
     </div>
-    <div class="text-xs font-medium">${formatINR(p.price)}</div>
+    <div class="text-xs font-bold text-[#6D0016]">${formatINR(p.price)}</div>
   </div>`).join('');
 
 /* Inventory table */
 const inv = PRODUCTS.slice(0,8);
 document.getElementById('inventory-table').innerHTML = `
-  <thead><tr class="text-left text-xs opacity-50 border-b border-[var(--line-soft)]">
-    <th class="py-3 font-normal">Product</th><th class="py-3 font-normal">Category</th><th class="py-3 font-normal">Price</th><th class="py-3 font-normal">Stock</th><th class="py-3 font-normal">Status</th>
+  <thead><tr class="text-left text-xs text-[#2E2625]/60 border-b border-[#E5D5B5]">
+    <th class="py-3 font-semibold">Product</th><th class="py-3 font-semibold">Category</th><th class="py-3 font-semibold">Price</th><th class="py-3 font-semibold">Stock</th><th class="py-3 font-semibold">Status</th>
   </tr></thead>
   <tbody>
     ${inv.map(p=>`
-      <tr class="border-b border-[var(--line-soft)] last:border-0 ${p.stock<6?'bg-red-700/5':''}">
-        <td class="py-3 flex items-center gap-3"><img src="${p.img1}" class="w-8 h-10 object-cover rounded-sm" alt="${p.name}"/><span class="line-clamp-1 max-w-[180px]">${p.name}</span></td>
-        <td class="py-3 opacity-70 capitalize">${p.category}</td>
-        <td class="py-3">${formatINR(p.price)}</td>
-        <td class="py-3 ${p.stock<6?'text-red-700 font-medium':''}">${p.stock}</td>
-        <td class="py-3"><span class="text-xs px-2.5 py-1 rounded-full ${p.stock===0?'bg-red-700/10 text-red-700':p.stock<6?'bg-[#7A1F3D]/10 text-[#7A1F3D]':'bg-green-800/10 text-green-800'}">${p.stock===0?'Out of Stock':p.stock<6?'Low Stock':'In Stock'}</span></td>
+      <tr class="border-b border-[#E5D5B5] last:border-0 ${p.stock<6?'bg-red-700/5':''}">
+        <td class="py-3 flex items-center gap-3"><img src="${p.img1}" class="w-8 h-10 object-cover rounded-sm border border-[#E5D5B5]" alt="${p.name}"/><span class="line-clamp-1 max-w-[180px] font-medium text-[#2E2625]">${p.name}</span></td>
+        <td class="py-3 text-[#2E2625]/70 capitalize">${p.category}</td>
+        <td class="py-3 font-bold text-[#6D0016]">${formatINR(p.price)}</td>
+        <td class="py-3 ${p.stock<6?'text-red-700 font-bold':''}">${p.stock}</td>
+        <td class="py-3"><span class="text-xs px-2.5 py-1 rounded-full ${p.stock===0?'bg-red-700/10 text-red-700 font-bold':p.stock<6?'bg-[#6D0016]/10 text-[#6D0016] font-bold':'bg-emerald-800/10 text-emerald-800 font-bold'}">${p.stock===0?'Out of Stock':p.stock<6?'Low Stock':'In Stock'}</span></td>
       </tr>`).join('')}
   </tbody>`;

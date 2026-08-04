@@ -70,8 +70,8 @@ export function toast(msg, sub=''){
   const el = document.createElement('div');
   el.className = 'toast';
   el.innerHTML = `
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#7A1F3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <div><div style="font-size:0.88rem;font-weight:700;color:#7A1F3D;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#2F2A28;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:2px" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#6D0016" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><div style="font-size:0.88rem;font-weight:700;color:#6D0016;letter-spacing:0.03em">${msg}</div>${sub ? `<div style="font-size:0.78rem;color:#2E2625;opacity:0.95;margin-top:2px">${sub}</div>` : ''}</div>
   `;
   root.appendChild(el);
   requestAnimationFrame(()=>el.classList.add('show'));
@@ -139,8 +139,8 @@ export function initSearch(){
   const renderSuggestions = () => {
     if (!results) return;
     results.innerHTML = `
-      <div class="p-5 text-[#2F2A28] border-t border-[#E7DED3]/30">
-        <div class="text-[10px] uppercase tracking-[0.25em] text-[#2F2A28]/50 font-bold mb-3">Suggested Searches</div>
+      <div class="p-5 text-[#2E2625] border-t border-[#E5D5B5]">
+        <div class="text-[10px] uppercase tracking-[0.25em] text-[#6D0016] font-bold mb-3">Suggested Searches</div>
         <div class="flex flex-wrap gap-2">
           ${[
             { label: "Wedding Sarees", query: "wedding" },
@@ -150,7 +150,7 @@ export function initSearch(){
             { label: "Under ₹3,000", query: "under 3000", action: () => { location.href = "shop.html?maxPrice=3000"; } },
             { label: "Today's Collection", query: "today", action: () => { location.href = "shop.html?filter=today"; } }
           ].map((s, idx) => `
-            <button type="button" data-suggestion="${idx}" class="text-xs border border-[#E7DED3] hover:border-[#7A1F3D] hover:text-[#7A1F3D] px-4 py-2 rounded-full transition-all bg-[#FCFAF7] font-medium">
+            <button type="button" data-suggestion="${idx}" class="text-xs border border-[#E5D5B5] hover:border-[#6D0016] hover:text-[#6D0016] px-4 py-2 rounded-full transition-all bg-[#FAF5EF] font-medium">
               ${s.label}
             </button>
           `).join('')}
@@ -214,10 +214,10 @@ export function initSearch(){
     if (q.length < 2){ results.innerHTML=''; return; }
     const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.includes(q) || p.fabric.toLowerCase().includes(q) || (p.category+' '+p.fabric).toLowerCase().includes(q) || ['wedding sarees','silk sarees','banarasi','cotton sarees','party wear','designer collection'].some(n=>n.includes(q)&&p.category===n.split(' ')[0].toLowerCase())).slice(0,6);
     results.innerHTML = matches.length ? matches.map(p=>`
-      <a href="product.html?slug=${p.slug}" class="flex items-center gap-4 p-3 hover:bg-zinc-100 rounded transition">
-        <img src="${p.img1}" class="w-14 h-16 object-cover rounded" alt="${p.name}"/>
-        <div class="flex-1"><div class="text-sm font-medium">${p.name}</div><div class="text-xs font-sans font-bold text-black">${formatINR(p.price)}</div></div>
-      </a>`).join('') : `<div class="text-sm opacity-60 p-3">No results found for "${q}"</div>`;
+      <a href="product.html?slug=${p.slug}" class="flex items-center gap-4 p-3 hover:bg-[#F3ECE2] rounded transition">
+        <img src="${p.img1}" class="w-14 h-16 object-cover rounded border border-[#E5D5B5]" alt="${p.name}"/>
+        <div class="flex-1"><div class="text-sm font-medium text-[#2E2625]">${p.name}</div><div class="text-xs font-sans font-bold text-[#6D0016]">${formatINR(p.price)}</div></div>
+      </a>`).join('') : `<div class="text-sm opacity-80 text-[#2E2625] p-3">No results found for "${q}"</div>`;
   });
   document.addEventListener('keydown', (e)=>{ if (e.key==='Escape') close(); });
 }

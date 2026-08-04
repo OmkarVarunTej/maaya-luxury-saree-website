@@ -9,21 +9,21 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = { theme: { extend: { colors: {
-    cream:'#FCFAF7', ivory:'#F7F3EE', champagne:'#FFFFFF', gold:'#C9A14A', brown:'#2F2A28', maroon:'#7A1F3D'
+    cream:'#FAF5EF', ivory:'#F3ECE2', champagne:'#FFFFFF', gold:'#D4AF37', brown:'#2E2625', maroon:'#6D0016'
   }, fontFamily: { display:['Cormorant Garamond','serif'], heading:['Playfair Display','serif'], body:['DM Sans','sans-serif'] } } } }
 </script>
 <link rel="stylesheet" href="css/main.css"/>
 </head>
-<body class="bg-[#FFFFFF] text-[#2F2A28] font-body">
+<body class="bg-[#FAF5EF] text-[#2E2625] font-body">
 
 <div id="navbar-root"></div>
 
-<header class="pt-28 md:pt-36 pb-10 md:pb-14 max-w-[1400px] mx-auto px-6 md:px-10">
-  <nav class="text-xs text-[#7A1F3D] mb-4 flex items-center gap-2">
-    <a href="index.html" class="hover:text-[#8C2847]">Home</a> <span>/</span> <span id="crumb-current" class="text-[#2F2A28]">Shop All</span>
+<header class="pt-20 md:pt-24 pb-10 md:pb-14 max-w-[1400px] mx-auto px-6 md:px-10">
+  <nav class="text-xs text-[#D4AF37] mb-4 flex items-center gap-2">
+    <a href="index.html" class="hover:text-[#6D0016]">Home</a> <span>/</span> <span id="crumb-current" class="text-[#2E2625]">Shop All</span>
   </nav>
-  <h1 id="page-title" class="section-title text-4xl md:text-6xl text-[#2F2A28]">Shop All Sarees</h1>
-  <p id="page-sub" class="text-[#2F2A28]/80 mt-3 max-w-xl font-light">Handwoven silk, cotton, and heritage weaves — curated for the modern wardrobe.</p>
+  <h1 id="page-title" class="section-title text-4xl md:text-6xl text-[#6D0016]">Shop All Sarees</h1>
+  <p id="page-sub" class="text-[#2E2625]/85 mt-3 max-w-xl font-light">Handwoven silk, cotton, and heritage weaves — curated for the modern wardrobe.</p>
 </header>
 
 <section class="max-w-[1400px] mx-auto px-6 md:px-10 pb-28">
@@ -36,25 +36,25 @@
 
     <div class="flex-1 min-w-0">
       <!-- Toolbar -->
-      <div class="flex items-center justify-between gap-4 mb-8 pb-5 border-b border-[var(--line)]">
+      <div class="flex items-center justify-between gap-4 mb-8 pb-5 border-b border-[#E5D5B5]">
         <button data-filter-toggle class="lg:hidden btn btn-outline text-xs px-4 py-2.5 flex items-center gap-2">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           Filters
         </button>
-        <div id="result-count" class="text-xs md:text-sm text-[#7A1F3D] hidden lg:block"></div>
+        <div id="result-count" class="text-xs md:text-sm text-[#6D0016] font-bold hidden lg:block"></div>
         <div class="flex items-center gap-3 ml-auto">
-          <select id="sort-select" class="text-xs md:text-sm border border-[#E7DED3] rounded-md px-3.5 py-2.5 bg-white text-[#2F2A28] outline-none focus:border-[#7A1F3D] cursor-pointer">
-            <option value="featured" class="bg-white text-[#2F2A28]">Sort: Featured</option>
-            <option value="new" class="bg-white text-[#2F2A28]">Newest First</option>
-            <option value="price-low" class="bg-white text-[#2F2A28]">Price: Low to High</option>
-            <option value="price-high" class="bg-white text-[#2F2A28]">Price: High to Low</option>
-            <option value="rating" class="bg-white text-[#2F2A28]">Highest Rated</option>
+          <select id="sort-select" class="text-xs md:text-sm border border-[#E5D5B5] rounded-md px-3.5 py-2.5 bg-[#FAF5EF] text-[#2E2625] outline-none focus:border-[#6D0016] cursor-pointer">
+            <option value="featured" class="bg-[#FAF5EF] text-[#2E2625]">Sort: Featured</option>
+            <option value="new" class="bg-[#FAF5EF] text-[#2E2625]">Newest First</option>
+            <option value="price-low" class="bg-[#FAF5EF] text-[#2E2625]">Price: Low to High</option>
+            <option value="price-high" class="bg-[#FAF5EF] text-[#2E2625]">Price: High to Low</option>
+            <option value="rating" class="bg-[#FAF5EF] text-[#2E2625]">Highest Rated</option>
           </select>
-          <div class="hidden md:flex items-center border border-[var(--line)] rounded-sm overflow-hidden">
-            <button data-view="grid" class="view-btn px-3 py-2.5" aria-label="Grid view">
+          <div class="hidden md:flex items-center border border-[#E5D5B5] rounded-sm overflow-hidden">
+            <button data-view="grid" class="view-btn px-3 py-2.5 text-[#6D0016]" aria-label="Grid view">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/><rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="1.5"/></svg>
             </button>
-            <button data-view="list" class="view-btn px-3 py-2.5 border-l border-[var(--line)]" aria-label="List view">
+            <button data-view="list" class="view-btn px-3 py-2.5 border-l border-[#E5D5B5] text-[#2E2625]" aria-label="List view">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </button>
           </div>
@@ -64,8 +64,8 @@
       <div id="active-chips" class="flex flex-wrap gap-2 mb-6"></div>
       <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-7"></div>
       <div id="empty-state" class="hidden text-center py-24">
-        <p class="font-heading text-2xl mb-2">No sarees match these filters</p>
-        <p class="opacity-60 text-sm mb-6">Try adjusting or clearing your filters.</p>
+        <p class="font-heading text-2xl mb-2 text-[#6D0016]">No sarees match these filters</p>
+        <p class="opacity-80 text-sm mb-6 text-[#2E2625]">Try adjusting or clearing your filters.</p>
         <button id="clear-filters-empty" class="btn btn-outline">Clear All Filters</button>
       </div>
       <div id="pagination" class="flex items-center justify-center gap-2 mt-16"></div>
@@ -76,10 +76,10 @@
 <!-- Mobile filter drawer -->
 <div data-filter-drawer class="fixed inset-0 z-[110] translate-x-[-100%] transition-transform duration-500 lg:hidden" style="transition-timing-function:cubic-bezier(.22,1,.36,1)">
   <div class="absolute inset-0 bg-black/50" data-filter-close></div>
-  <div class="absolute left-0 top-0 bottom-0 w-[86%] max-w-sm bg-[var(--cream)] p-6 overflow-y-auto">
+  <div class="absolute left-0 top-0 bottom-0 w-[86%] max-w-sm bg-[#FAF5EF] p-6 overflow-y-auto border-r border-[#E5D5B5]">
     <div class="flex justify-between items-center mb-6">
-      <span class="font-heading text-xl">Filters</span>
-      <button data-filter-close class="p-2" aria-label="Close filters">
+      <span class="font-heading text-xl text-[#6D0016]">Filters</span>
+      <button data-filter-close class="p-2 text-[#2E2625] hover:text-[#6D0016]" aria-label="Close filters">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
     </div>
@@ -88,156 +88,7 @@
   </div>
 </div>
 
-<div id="footer-root">
-  <footer class="bg-[#FCFAF7] text-[#2F2A28] pt-14 pb-8 border-t border-[#E7DED3] relative z-10 font-sans">
-    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
-      
-      <!-- Top Grid: 5 Columns -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-        
-        <!-- Column 1: Brand & Contact -->
-        <div class="space-y-4">
-          <a href="index.html" class="inline-block">
-            <span class="font-serif text-3xl font-bold tracking-[0.2em] text-[#7A1F3D] block leading-none" style="font-family:'Playfair Display', serif;">MAAYA</span>
-            <span class="text-[10px] uppercase tracking-[0.3em] text-[#7A1F3D] font-bold mt-1 block">ROYAL WEAVES</span>
-          </a>
-          
-          <!-- Phone Box -->
-          <div class="flex items-center gap-3 pt-2">
-            <div class="w-10 h-10 rounded-full border border-[#7A1F3D]/30 flex items-center justify-center text-[#7A1F3D] bg-[#7A1F3D]/5 shrink-0">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div>
-              <div class="text-xl font-bold text-[#2F2A28] tracking-tight">+91 98450 12345</div>
-            </div>
-          </div>
-
-          <ul class="space-y-2 text-sm text-[#2F2A28]/80 pt-1 font-normal">
-            <li><a href="mailto:hello@maaya.co.in" class="hover:text-[#7A1F3D] transition-colors">hello@maaya.co.in</a></li>
-            <li><a href="account.html" class="hover:text-[#7A1F3D] transition-colors">Track Your Order</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Stores</a></li>
-          </ul>
-
-          <!-- Social Icons -->
-          <div class="flex gap-3 pt-2">
-            <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-            </a>
-            <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="#" aria-label="YouTube" class="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300 text-xs">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Column 2: Shop -->
-        <div>
-          <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
-            Shop
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
-            <li><a href="shop.html?cat=wedding" class="hover:text-[#7A1F3D] transition-colors">Festive</a></li>
-            <li><a href="shop.html?cat=wedding" class="hover:text-[#7A1F3D] transition-colors">Wedding</a></li>
-            <li><a href="shop.html?cat=party" class="hover:text-[#7A1F3D] transition-colors">Party</a></li>
-            <li><a href="shop.html?live=true" class="hover:text-[#7A1F3D] transition-colors">Video Call Shopping</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 3: GET TO KNOW US -->
-        <div>
-          <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
-            GET TO KNOW US
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
-            <li><a href="#" class="text-[#7A1F3D] font-medium hover:underline">FAQ</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Blog</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Awards</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Media</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Stores</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Virtual Tour</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 4: USER POLICY -->
-        <div>
-          <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
-            USER POLICY
-            <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
-          </h3>
-          <ul class="space-y-2.5 text-sm text-[#2F2A28]/80 font-normal pt-1">
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Terms & Conditions</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Disclaimer</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Return Policy</a></li>
-            <li><a href="#" class="hover:text-[#7A1F3D] transition-colors">Shipping Policy</a></li>
-          </ul>
-        </div>
-
-        <!-- Column 5: Newsletter & Payment Badges -->
-        <div class="space-y-4">
-          <div>
-            <h3 class="text-base font-bold text-[#2F2A28] mb-3 relative pb-2 inline-block">
-              Join Our Newsletter
-              <span class="absolute bottom-0 left-0 w-10 h-[2px] bg-[#7A1F3D]"></span>
-            </h3>
-            <p class="text-xs text-[#2F2A28]/80 mb-3">Sign up for our e-mail to get latest news.</p>
-            
-            <form onsubmit="event.preventDefault(); alert('Subscribed to MAAYA Newsletter!');" class="flex items-center bg-white rounded-full p-1 border border-gray-300 shadow-sm max-w-full">
-              <input type="email" placeholder="Your email address" required class="w-full px-4 py-2 text-xs bg-transparent outline-none text-[#2F2A28]" />
-              <button type="submit" class="bg-[#2F2A28] hover:bg-[#7A1F3D] text-white text-xs font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shrink-0">Subscribe</button>
-            </form>
-          </div>
-
-          <div class="pt-2">
-            <h4 class="text-xs font-bold text-[#2F2A28] uppercase tracking-wider mb-1">Stay Connected With MAAYA</h4>
-            <p class="text-[11px] text-[#2F2A28]/80 mb-3">Get Latest Updates From Us</p>
-            
-            <div class="border-t border-gray-300/60 pt-3">
-              <h4 class="text-xs font-bold text-[#2F2A28] mb-2 relative pb-1 inline-block">
-                We Accept
-                <span class="absolute bottom-0 left-0 w-8 h-[2px] bg-[#7A1F3D]"></span>
-              </h4>
-              <div class="flex items-center gap-2 pt-1">
-                <!-- VISA Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-blue-900 shadow-sm flex items-center gap-1">
-                  <span class="italic font-extrabold text-blue-800">VISA</span>
-                </div>
-                <!-- MasterCard Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-gray-800 shadow-sm flex items-center gap-1">
-                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-red-600"></span>
-                  <span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-500 -ml-2"></span>
-                </div>
-                <!-- UPI Badge -->
-                <div class="bg-white border border-gray-200 rounded px-2 py-1 text-[11px] font-bold text-emerald-700 shadow-sm">
-                  <span>UPI ⚡</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Bottom Bar with Scroll-to-Top Button -->
-      <div class="border-t border-gray-300/70 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#2F2A28]/80">
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-[#7A1F3D] font-serif">MAAYA</span>
-          <span>© Copyright 2026 MAAYA. All Rights Reserved</span>
-        </div>
-
-        <!-- Scroll To Top Button -->
-        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Scroll to top" class="w-9 h-9 rounded-full bg-white border border-gray-300 shadow-md text-gray-700 flex items-center justify-center hover:bg-[#7A1F3D] hover:text-white hover:border-[#7A1F3D] transition duration-300">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
-        </button>
-      </div>
-
-    </div>
-  </footer>
-</div>
+<div id="footer-root"></div>
 <div id="toast-root"></div>
 
 <!-- Quick view modal -->

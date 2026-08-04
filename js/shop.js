@@ -41,50 +41,50 @@ function updateHeader(){
 function filtersHTML(){
   return `
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Category</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#6D0016] font-bold mb-4">Category</div>
       <div class="space-y-2.5">
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="cat" value="all" ${state.cat==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Sarees
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="cat" value="all" ${state.cat==='all'?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> All Sarees
         </label>
         ${CATEGORIES.map(c=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="cat" value="${c.id}" ${state.cat===c.id?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${c.name}
-          <span class="ml-auto text-[#7A1F3D] text-xs font-semibold">${c.count}</span>
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="cat" value="${c.id}" ${state.cat===c.id?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> ${c.name}
+          <span class="ml-auto text-[#6D0016] text-xs font-semibold">${c.count}</span>
         </label>`).join('')}
       </div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Price Range</div>
-      <input type="range" id="price-range" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#7A1F3D]"/>
-      <div class="flex justify-between text-xs text-[#7A1F3D]"><span>₹0</span><span id="price-val" class="font-bold text-[#7A1F3D]">${formatINR(state.maxPrice)}</span></div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#6D0016] font-bold mb-4">Price Range</div>
+      <input type="range" id="price-range" min="0" max="55000" step="1000" value="${state.maxPrice}" class="w-full mb-2 accent-[#6D0016]"/>
+      <div class="flex justify-between text-xs text-[#6D0016]"><span>₹0</span><span id="price-val" class="font-bold text-[#6D0016]">${formatINR(state.maxPrice)}</span></div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Fabric</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#6D0016] font-bold mb-4">Fabric</div>
       <div class="space-y-2.5">
         ${FABRICS.map(f=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="fabric" value="${f}" ${state.fabric===f?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${f}
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="fabric" value="${f}" ${state.fabric===f?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> ${f}
         </label>`).join('')}
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="fabric" value="all" ${state.fabric==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Fabrics
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="fabric" value="all" ${state.fabric==='all'?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> All Fabrics
         </label>
       </div>
     </div>
     <div class="mb-8">
-      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#2F2A28] font-bold mb-4">Occasion</div>
+      <div class="font-heading text-xs uppercase tracking-[0.2em] text-[#6D0016] font-bold mb-4">Occasion</div>
       <div class="space-y-2.5">
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="occasion" value="all" ${state.occasion==='all'?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> All Occasions
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="occasion" value="all" ${state.occasion==='all'?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> All Occasions
         </label>
         ${OCCASIONS.map(o=>`
-        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2F2A28] hover:text-[#7A1F3D] transition-colors">
-          <input type="checkbox" name="occasion" value="${o.id}" ${state.occasion===o.id?'checked':''} class="accent-[#7A1F3D] rounded border-gray-300 w-4 h-4"/> ${o.name}
+        <label class="flex items-center gap-2.5 text-sm cursor-pointer text-[#2E2625] hover:text-[#6D0016] transition-colors">
+          <input type="checkbox" name="occasion" value="${o.id}" ${state.occasion===o.id?'checked':''} class="accent-[#6D0016] rounded border-gray-300 w-4 h-4"/> ${o.name}
         </label>`).join('')}
       </div>
     </div>
 
     <div class="mb-4">
-      <button id="clear-filters" class="w-full btn border border-[#7A1F3D] text-[#7A1F3D] hover:bg-[#7A1F3D] hover:text-[#FFFFFF] text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
+      <button id="clear-filters" class="w-full btn border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white text-xs uppercase font-bold py-2.5 tracking-wider rounded-md transition-all">Clear All Filters</button>
     </div>
   `;
 }
@@ -160,7 +160,7 @@ function renderChips(){
 
   const root = document.getElementById('active-chips');
   root.innerHTML = chips.map((c,i)=>`
-    <button data-chip="${i}" class="flex items-center gap-1.5 text-xs bg-[var(--champagne)]/60 px-3 py-1.5 rounded-full">
+    <button data-chip="${i}" class="flex items-center gap-1.5 text-xs bg-[#FAF5EF] text-[#6D0016] border border-[#D4AF37]/50 px-3 py-1.5 rounded-full font-medium">
       ${c.label} <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>`).join('');
   root.querySelectorAll('[data-chip]').forEach(btn=>btn.addEventListener('click', ()=>{
@@ -187,17 +187,17 @@ function renderGrid(){
     grid.innerHTML = pageItems.map((p,i)=>productCardHTML(p,i)).join('');
   } else {
     grid.innerHTML = pageItems.map(p=>`
-      <a href="product.html?slug=${p.slug}" class="flex gap-5 md:gap-8 bg-[var(--ivory)] p-4 md:p-5 rounded-sm lift reveal">
+      <a href="product.html?slug=${p.slug}" class="flex gap-5 md:gap-8 bg-[#FAF5EF] border border-[#E5D5B5] p-4 md:p-5 rounded-sm lift reveal">
         <div class="w-32 md:w-48 aspect-[3/4] shrink-0 overflow-hidden rounded-sm">
           <img src="${p.img1}" alt="${p.name}" class="w-full h-full object-cover"/>
         </div>
         <div class="flex-1 min-w-0 flex flex-col">
-          <div class="font-heading text-lg md:text-xl mb-1">${p.name}</div>
+          <div class="font-heading text-lg md:text-xl mb-1 text-[#6D0016]">${p.name}</div>
 
-          <p class="text-sm opacity-60 line-clamp-2 mb-3 hidden md:block">${p.description}</p>
+          <p class="text-sm opacity-80 text-[#2E2625] line-clamp-2 mb-3 hidden md:block">${p.description}</p>
           <div class="mt-auto flex items-baseline gap-2">
-            <span class="font-sans text-xl font-bold text-black">${formatINR(p.price)}</span>
-            ${p.oldPrice ? `<span class="text-xs opacity-80 line-through">${formatINR(p.oldPrice)}</span>` : ''}
+            <span class="font-sans text-xl font-bold text-[#6D0016]">${formatINR(p.price)}</span>
+            ${p.oldPrice ? `<span class="text-xs opacity-80 line-through text-[#8E827E]">${formatINR(p.oldPrice)}</span>` : ''}
           </div>
         </div>
       </a>`).join('');
@@ -212,7 +212,7 @@ function renderGrid(){
   if (totalPages <= 1){ pag.innerHTML=''; return; }
   let html = '';
   for (let i=1;i<=totalPages;i++){
-    html += `<button data-page="${i}" class="w-9 h-9 text-sm rounded-full border ${i===state.page?'bg-[#7A1F3D] text-white border-[#7A1F3D]':'border-[var(--line)] hover:border-[var(--gold)]'}">${i}</button>`;
+    html += `<button data-page="${i}" class="w-9 h-9 text-sm rounded-full border ${i===state.page?'bg-[#6D0016] text-[#D4AF37] border-[#6D0016] font-bold':'border-[#E5D5B5] text-[#2E2625] hover:border-[#D4AF37]'}">${i}</button>`;
   }
   pag.innerHTML = html;
   pag.querySelectorAll('[data-page]').forEach(btn=>btn.addEventListener('click', ()=>{
@@ -231,7 +231,7 @@ function sync(){
 document.getElementById('sort-select').addEventListener('change', e=>{ state.sort = e.target.value; renderGrid(); });
 document.querySelectorAll('.view-btn').forEach(btn=>btn.addEventListener('click', ()=>{
   state.view = btn.dataset.view;
-  document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('bg-[var(--champagne)]/50', b===btn));
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('bg-[#F3ECE2]', b===btn));
   renderGrid();
 }));
 
@@ -244,8 +244,8 @@ document.querySelectorAll('[data-filter-close]').forEach(el=>el.addEventListener
   drawer.classList.add('translate-x-[-100%]'); document.body.classList.remove('overflow-hidden');
 }));
 
+sync();
 initQuickView(PRODUCTS, Cart, toast);
 initNavbarScroll();
 initMobileMenu();
 initSearch();
-sync();
