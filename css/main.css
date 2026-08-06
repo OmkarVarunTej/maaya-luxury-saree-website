@@ -6,7 +6,7 @@
    ============================================================ */
 
 :root {
-  --background: #FAF5EF;
+  --background: #E7E2D2;
   --surface: #FFFFFF;
   --surface-alt: #F3ECE2;
   --surface-soft: #EFE6D8;
@@ -656,7 +656,7 @@ input[type=range]::-webkit-slider-thumb {
   right: 12px;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
-  color: #6D0016;
+  color: oklch(33.809% 0.13591 20.661);
   border: 1px solid #E7DED3;
   padding: 8px 0;
   text-align: center;
@@ -677,6 +677,7 @@ input[type=range]::-webkit-slider-thumb {
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
+
   #hero-left,
   #hero-right {
     width: 100%;
@@ -710,7 +711,7 @@ input[type=range]::-webkit-slider-thumb {
     max-width: min(100%, 320px);
   }
 
-  #navbar-root > div:nth-of-type(2) {
+  #navbar-root>div:nth-of-type(2) {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
@@ -725,11 +726,11 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 14px;
   }
 
-  #navbar-root + header {
+  #navbar-root+header {
     padding-top: 5.25rem !important;
   }
 
-  #navbar-root + section {
+  #navbar-root+section {
     padding-top: 5.25rem !important;
   }
 
@@ -737,7 +738,8 @@ input[type=range]::-webkit-slider-thumb {
     gap: 0.75rem !important;
   }
 
-  .pc-badge-glass, .pc-badge-glass-soldout {
+  .pc-badge-glass,
+  .pc-badge-glass-soldout {
     padding: 0.22rem 0.48rem !important;
     font-size: 0.48rem !important;
     letter-spacing: 0.08em !important;
@@ -761,28 +763,29 @@ input[type=range]::-webkit-slider-thumb {
     gap: 0.4rem !important;
     letter-spacing: 0.12em !important;
   }
-  
+
   section {
     padding-bottom: 4rem !important;
   }
-  
+
   .pt-28 {
     padding-top: 5rem !important;
   }
-  
-  .pt-32, .pt-36 {
+
+  .pt-32,
+  .pt-36 {
     padding-top: 6rem !important;
   }
 }
 
 @media (max-width: 480px) {
-  #navbar-root + section {
+  #navbar-root+section {
     min-height: auto !important;
     padding-top: 8rem !important;
     padding-bottom: 2.5rem !important;
   }
 
-  #navbar-root + section > .relative.max-w-\[1500px\] {
+  #navbar-root+section>.relative.max-w-\[1500px\] {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
     gap: 1.75rem !important;
@@ -820,6 +823,7 @@ input[type=range]::-webkit-slider-thumb {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -831,20 +835,18 @@ input[type=range]::-webkit-slider-thumb {
 
 .crystal-glass-navbar {
   /* High transparency glass panel with subtle light refraction gradient */
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0.16) 45%,
-    rgba(255, 255, 255, 0.24) 100%
-  ) !important;
-  
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.16) 45%,
+      rgba(255, 255, 255, 0.24) 100%) !important;
+
   /* Very subtle backdrop blur (6px max) focused on crystal refraction, NOT heavy blur */
   backdrop-filter: blur(6px) saturate(140%) !important;
   -webkit-backdrop-filter: blur(6px) saturate(140%) !important;
-  
+
   /* Crystal 1px border with specular light highlight */
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
-  
+
   /* Multi-layered physical depth: inner glow + specular top edge reflection + soft outer shadow */
   box-shadow:
     0 12px 35px -8px rgba(0, 0, 0, 0.08),
@@ -860,12 +862,10 @@ input[type=range]::-webkit-slider-thumb {
 /* Scrolled state: slightly increased glass opacity and subtle depth enhancement */
 .crystal-glass-navbar.scrolled,
 #navbar-root.scrolled .crystal-glass-navbar {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.36) 0%,
-    rgba(255, 255, 255, 0.24) 50%,
-    rgba(255, 255, 255, 0.32) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.36) 0%,
+      rgba(255, 255, 255, 0.24) 50%,
+      rgba(255, 255, 255, 0.32) 100%) !important;
   box-shadow:
     0 16px 40px -6px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.04),
@@ -879,12 +879,10 @@ input[type=range]::-webkit-slider-thumb {
   background: rgba(255, 255, 255, 0.22) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
   box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.7), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.36) 0%,
-    rgba(255, 255, 255, 0.24) 50%,
-    rgba(255, 255, 255, 0.32) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.36) 0%,
+      rgba(255, 255, 255, 0.24) 50%,
+      rgba(255, 255, 255, 0.32) 100%) !important;
   box-shadow:
     0 16px 40px -6px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.04),
@@ -957,12 +955,10 @@ input[type=range]::-webkit-slider-thumb {
   width: calc(100% - 1.5rem);
   max-width: 1440px;
   margin: 0 auto;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(252, 250, 248, 0.28) 50%,
-    rgba(255, 255, 255, 0.38) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(252, 250, 248, 0.28) 50%,
+      rgba(255, 255, 255, 0.38) 100%) !important;
   backdrop-filter: blur(10px) saturate(135%) !important;
   -webkit-backdrop-filter: blur(10px) saturate(135%) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.72) !important;

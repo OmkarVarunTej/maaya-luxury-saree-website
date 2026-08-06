@@ -74,15 +74,7 @@ function render(){
           </div>
         </div>
 
-        <!-- Size -->
-        <div class="mb-6">
-          <div class="text-sm font-medium mb-3 text-[#2E2625]">Blouse Size</div>
-          <div class="flex flex-wrap gap-2" id="size-options">
-            ${['Free Size','32','34','36','38','40','Unstitched'].map(s=>`
-              <button data-size="${s}" class="px-4 py-2 text-xs border rounded-sm ${s===selectedSize?'bg-[#6D0016] text-white border-[#6D0016] font-bold':'border-[#E5D5B5] text-[#2E2625] hover:border-[#D4AF37]'}">${s}</button>
-            `).join('')}
-          </div>
-        </div>
+
 
         <!-- Quantity -->
         <div class="mb-7">
@@ -175,13 +167,6 @@ function bindOptions(){
     selectedColor = btn.dataset.color;
     document.getElementById('color-label').textContent = selectedColor;
     document.querySelectorAll('#color-options [data-color]').forEach(b=>b.classList.toggle('border-[#D4AF37]', b===btn));
-  }));
-  document.querySelectorAll('#size-options [data-size]').forEach(btn=>btn.addEventListener('click', ()=>{
-    selectedSize = btn.dataset.size;
-    document.querySelectorAll('#size-options [data-size]').forEach(b=>{
-      const active = b===btn;
-      b.classList.toggle('bg-[#6D0016]', active); b.classList.toggle('text-white', active); b.classList.toggle('border-[#6D0016]', active);
-    });
   }));
   document.getElementById('qty-minus').addEventListener('click', ()=>{ qty = Math.max(1, qty-1); document.getElementById('qty-val').textContent = qty; });
   document.getElementById('qty-plus').addEventListener('click', ()=>{ qty = Math.min(product.stock||10, qty+1); document.getElementById('qty-val').textContent = qty; });
