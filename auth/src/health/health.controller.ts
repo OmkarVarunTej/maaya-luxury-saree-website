@@ -3,6 +3,9 @@ import { HealthCheck, HealthCheckService, PrismaHealthIndicator } from '@nestjs/
 import { AllowAnonymous } from '@thallesp/nestjs-better-auth';
 import { PrismaService } from '../database/prisma.service';
 
+// Better Auth's Nest integration registers a global AuthGuard (every route
+// requires a session unless opted out) — health checks must stay public so
+// load balancers and orchestrators can hit them unauthenticated.
 @AllowAnonymous()
 @Controller('health')
 export class HealthController {

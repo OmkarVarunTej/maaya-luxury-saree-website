@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 import { validateEnv } from './config/env.validation';
+import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './database/prisma.module';
 import { HealthModule } from './health/health.module';
-import { CatalogModule } from './catalog/catalog.module';
-import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -28,11 +27,10 @@ import { UsersModule } from './users/users.module';
     }),
     PrismaModule,
     HealthModule,
-    CatalogModule,
     AuthModule,
     UsersModule,
-    // Remaining feature modules (cart, orders, ...) are added here as
-    // each milestone lands.
+    // Remaining feature modules (catalog, cart, orders, ...) are added here
+    // as each milestone lands.
   ],
 })
 export class AppModule {}

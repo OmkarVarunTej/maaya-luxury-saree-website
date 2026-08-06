@@ -20,6 +20,9 @@ export const envSchema = z.object({
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
 
+  // Staff/admin auth is a deliberately separate credential space (Step 6 of
+  // the architecture doc) — never issued by the customer-facing Better Auth
+  // instance above. Wired up in Milestone 8.
   JWT_ADMIN_ACCESS_SECRET: z.string().min(16, 'JWT_ADMIN_ACCESS_SECRET must be at least 16 chars'),
   JWT_ADMIN_EXPIRES_IN: z.string().default('15m'),
 

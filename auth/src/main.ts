@@ -31,6 +31,8 @@ async function bootstrap() {
   });
 
   // --- API contract baseline ---
+  // Better Auth mounts itself at /api/auth/* (see auth.instance.ts) — kept
+  // outside the versioned prefix below so it isn't double-prefixed.
   app.setGlobalPrefix(config.get('API_PREFIX', { infer: true }), {
     exclude: ['api/auth/(.*)'],
   });
