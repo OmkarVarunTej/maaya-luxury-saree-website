@@ -1,0 +1,466 @@
+// MAAYA — Prisma schema (Milestone 1: Foundation)
+// Reviews module intentionally omitted (client instruction).
+// Payments table exists as a placeholder FK target for `orders`; the payments
+// module itself is built last (see roadmap) — no payment logic lives on top
+// of this table yet.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Auth & Users
+// ---------------------------------------------------------------------------
+
+enum UserStatus {
+  active
+  blocked
+  deleted
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  phone           String?   @unique
+  passwordHash    String?   @map("password_hash")
+  fullName        String    @map("full_name")
+  status          UserStatus @default(active)
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  phoneVerifiedAt DateTime? @map("phone_verified_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  deletedAt       DateTime? @map("deleted_at")
+
+  identities    AuthIdentity[]
+  refreshTokens RefreshToken[]
+  addresses     Address[]
+  carts         Cart[]
+  orders        Order[]
+  wishlistItems WishlistItem[]
+  otpCodes      OtpCode[]
+
+  @@index([status])
+  @@map("users")
+}
+
+model AuthIdentity {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  provider        String // 'google', etc.
+  providerUserId  String   @map("provider_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerUserId])
+  @@index([userId])
+  @@map("auth_identities")
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid())
+  userId     String    @map("user_id")
+  tokenHash  String    @map("token_hash")
+  deviceInfo Json?     @map("device_info")
+  expiresAt  DateTime  @map("expires_at")
+  revokedAt  DateTime? @map("revoked_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+  @@map("refresh_tokens")
+}
+
+enum OtpPurpose {
+  phone_verification
+  email_verification
+  password_reset
+  login
+}
+
+model OtpCode {
+  id           String     @id @default(uuid())
+  userId       String?    @map("user_id")
+  destination  String // email or phone the code was sent to
+  codeHash     String     @map("code_hash")
+  purpose      OtpPurpose
+  expiresAt    DateTime   @map("expires_at")
+  consumedAt   DateTime?  @map("consumed_at")
+  attemptCount Int        @default(0) @map("attempt_count")
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([destination, purpose])
+  @@map("otp_codes")
+}
+
+// ---------------------------------------------------------------------------
+// Catalog
+// ---------------------------------------------------------------------------
+
+model Category {
+  id        String     @id @default(uuid())
+  parentId  String?    @map("parent_id")
+  slug      String     @unique
+  name      String
+  imageUrl  String?    @map("image_url")
+  sortOrder Int        @default(0) @map("sort_order")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  parent   Category?  @relation("CategoryToParent", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryToParent")
+  products Product[]
+
+  @@map("categories")
+}
+
+enum ProductStatus {
+  draft
+  active
+  archived
+}
+
+model Product {
+  id               String        @id @default(uuid())
+  slug             String        @unique
+  name             String
+  description      String?
+  categoryId       String        @map("category_id")
+  fabric           String?
+  occasion         String?
+  basePrice        Decimal       @map("base_price") @db.Decimal(10, 2)
+  compareAtPrice   Decimal?      @map("compare_at_price") @db.Decimal(10, 2)
+  status           ProductStatus @default(draft)
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  deletedAt        DateTime?     @map("deleted_at")
+
+  category Category         @relation(fields: [categoryId], references: [id])
+  variants ProductVariant[]
+  images   ProductImage[]
+  wishlist WishlistItem[]
+
+  @@index([categoryId, status])
+  @@index([fabric])
+  @@index([occasion])
+  @@map("products")
+}
+
+model ProductVariant {
+  id             String   @id @default(uuid())
+  productId      String   @map("product_id")
+  sku            String   @unique
+  color          String
+  size           String   @default("Free Size")
+  price          Decimal  @db.Decimal(10, 2)
+  stock          Int      @default(0)
+  reservedStock  Int      @default(0) @map("reserved_stock")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@unique([productId, color, size])
+  @@index([productId])
+  @@map("product_variants")
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  productId String   @map("product_id")
+  url       String
+  sortOrder Int      @default(0) @map("sort_order")
+  isPrimary Boolean  @default(false) @map("is_primary")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_images")
+}
+
+// ---------------------------------------------------------------------------
+// Cart & Wishlist
+// ---------------------------------------------------------------------------
+
+enum CartStatus {
+  active
+  converted
+  abandoned
+}
+
+model Cart {
+  id         String     @id @default(uuid())
+  userId     String?    @map("user_id")
+  guestToken String?    @unique @map("guest_token")
+  status     CartStatus @default(active)
+  expiresAt  DateTime?  @map("expires_at")
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+
+  user  User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@index([userId])
+  @@map("carts")
+}
+
+model CartItem {
+  id                 String   @id @default(uuid())
+  cartId             String   @map("cart_id")
+  variantId          String   @map("variant_id")
+  qty                Int
+  unitPriceSnapshot  Decimal  @map("unit_price_snapshot") @db.Decimal(10, 2)
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  cart    Cart           @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variant ProductVariant @relation(fields: [variantId], references: [id])
+
+  @@unique([cartId, variantId])
+  @@map("cart_items")
+}
+
+model WishlistItem {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  productId String   @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("wishlists")
+}
+
+// ---------------------------------------------------------------------------
+// Addresses
+// ---------------------------------------------------------------------------
+
+model Address {
+  id         String    @id @default(uuid())
+  userId     String    @map("user_id")
+  label      String    @default("Home")
+  fullName   String    @map("full_name")
+  phone      String
+  line1      String
+  line2      String?
+  city       String
+  state      String
+  pincode    String
+  isDefault  Boolean   @default(false) @map("is_default")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  user             User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders   Order[] @relation("ShippingAddress")
+  billingOrders    Order[] @relation("BillingAddress")
+
+  @@index([userId])
+  @@map("addresses")
+}
+
+// ---------------------------------------------------------------------------
+// Orders (checkout wired later in Milestone 6; schema exists now)
+// ---------------------------------------------------------------------------
+
+enum OrderStatus {
+  pending_payment
+  processing
+  shipped
+  delivered
+  cancelled
+  refunded
+}
+
+model Order {
+  id                  String      @id @default(uuid())
+  orderNumber         String      @unique @map("order_number")
+  userId              String      @map("user_id")
+  status              OrderStatus @default(pending_payment)
+  subtotal            Decimal     @db.Decimal(10, 2)
+  discount            Decimal     @default(0) @db.Decimal(10, 2)
+  shippingFee         Decimal     @default(0) @map("shipping_fee") @db.Decimal(10, 2)
+  tax                 Decimal     @default(0) @db.Decimal(10, 2)
+  total               Decimal     @db.Decimal(10, 2)
+  currency            String      @default("INR")
+  shippingAddressId   String      @map("shipping_address_id")
+  billingAddressId    String?     @map("billing_address_id")
+  placedAt            DateTime?   @map("placed_at")
+  createdAt           DateTime    @default(now()) @map("created_at")
+  updatedAt           DateTime    @updatedAt @map("updated_at")
+
+  user            User               @relation(fields: [userId], references: [id])
+  shippingAddress Address            @relation("ShippingAddress", fields: [shippingAddressId], references: [id])
+  billingAddress  Address?           @relation("BillingAddress", fields: [billingAddressId], references: [id])
+  items           OrderItem[]
+  statusHistory   OrderStatusEvent[]
+  payments        Payment[]
+
+  @@index([userId, status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id                   String  @id @default(uuid())
+  orderId              String  @map("order_id")
+  variantId            String  @map("variant_id")
+  productNameSnapshot  String  @map("product_name_snapshot")
+  unitPrice            Decimal @map("unit_price") @db.Decimal(10, 2)
+  qty                  Int
+  subtotal             Decimal @db.Decimal(10, 2)
+
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant ProductVariant @relation(fields: [variantId], references: [id])
+
+  @@index([orderId])
+  @@map("order_items")
+}
+
+model OrderStatusEvent {
+  id        String      @id @default(uuid())
+  orderId   String      @map("order_id")
+  status    OrderStatus
+  note      String?
+  changedBy String?     @map("changed_by")
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("order_status_history")
+}
+
+// Placeholder table — populated by the Payments module (built last per roadmap).
+model Payment {
+  id              String   @id @default(uuid())
+  orderId         String   @map("order_id")
+  gateway         String?
+  gatewayPaymentId String? @unique @map("gateway_payment_id")
+  amount          Decimal  @db.Decimal(10, 2)
+  status          String   @default("initiated")
+  rawPayload      Json?    @map("raw_payload")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@map("payments")
+}
+
+// ---------------------------------------------------------------------------
+// Coupons
+// ---------------------------------------------------------------------------
+
+enum CouponType {
+  percentage
+  flat
+}
+
+model Coupon {
+  id            String     @id @default(uuid())
+  code          String     @unique
+  type          CouponType
+  value         Decimal    @db.Decimal(10, 2)
+  minCartValue  Decimal?   @map("min_cart_value") @db.Decimal(10, 2)
+  maxUses       Int?       @map("max_uses")
+  usesCount     Int        @default(0) @map("uses_count")
+  startsAt      DateTime?  @map("starts_at")
+  endsAt        DateTime?  @map("ends_at")
+  active        Boolean    @default(true)
+  createdAt     DateTime   @default(now()) @map("created_at")
+
+  @@map("coupons")
+}
+
+// ---------------------------------------------------------------------------
+// Admin / RBAC / Audit
+// ---------------------------------------------------------------------------
+
+enum AdminStatus {
+  active
+  suspended
+}
+
+model AdminUser {
+  id           String      @id @default(uuid())
+  email        String      @unique
+  passwordHash String      @map("password_hash")
+  fullName     String      @map("full_name")
+  status       AdminStatus @default(active)
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+
+  roles AdminUserRole[]
+
+  @@map("admin_users")
+}
+
+model Role {
+  id   String @id @default(uuid())
+  name String @unique
+
+  permissions RolePermission[]
+  adminUsers  AdminUserRole[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id  String @id @default(uuid())
+  key String @unique // e.g. 'products.write', 'orders.refund'
+
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId       String @map("role_id")
+  permissionId String @map("permission_id")
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model AdminUserRole {
+  adminUserId String @map("admin_user_id")
+  roleId      String @map("role_id")
+
+  adminUser AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
+  role      Role      @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([adminUserId, roleId])
+  @@map("admin_user_roles")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String?  @map("actor_id")
+  actorType String   @map("actor_type") // 'admin' | 'system'
+  action    String
+  entity    String
+  entityId  String?  @map("entity_id")
+  before    Json?
+  after     Json?
+  ipAddress String?  @map("ip_address")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([entity, entityId])
+  @@map("audit_logs")
+}
